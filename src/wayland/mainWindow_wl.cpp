@@ -177,13 +177,11 @@ void QvkMainWindow_wl::closeEvent( QCloseEvent *event )
 QString QvkMainWindow_wl::get_pipewire_version()
 {
     if ( isFlatpak == true ) {
-        // Achtung!!!!!!!!!
-        // In com.github.vkohaupt.vokoscreenNG.yml muß filesystem=host gesetzt sein
         QString app = "flatpak-spawn";
         QString version = "";
         QProcess process;
         process.setProcessChannelMode( QProcess::MergedChannels );
-        process.start( app,  QStringList() << "/run/host/usr/bin/pipewire" << "--version" );
+        process.start( app,  QStringList() << "--host" << "/usr/bin/pipewire" << "--version" );
         if ( process.waitForFinished( 30000 ) ) {
             QString text( process.readAll() );
             QStringList list = text.split( "\n" );
