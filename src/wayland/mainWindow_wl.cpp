@@ -381,7 +381,7 @@ void QvkMainWindow_wl::slot_handle_response_snapshot( uint responseCode, QVarian
         path_to_snapshot_folder = fileInfo.absolutePath();
         disconnect( ui->pushButtonSnapshotOpenFolder, nullptr, nullptr, nullptr );
         connect( ui->pushButtonSnapshotOpenFolder, SIGNAL( clicked(bool) ), this, SLOT( slot_path_to_snapshot_folder(bool) ) );
-        qDebug().noquote() << global::nameOutput << "[Snapshot] User allowed us to take a screenshot! We can get it from" << url.toLocalFile();
+        qDebug().noquote() << global::nameOutput << "[Snapshot] Saved under the following path:" << url.toLocalFile();
 
         QvkShowMessage_wl *vkShowMessage_wl = new QvkShowMessage_wl();
         vkShowMessage_wl->set_StatusIcon( ":/pictures/status/information.png" );
