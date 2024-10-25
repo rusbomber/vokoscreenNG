@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>Fjern vindusramme</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Sekund venting før opptak</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

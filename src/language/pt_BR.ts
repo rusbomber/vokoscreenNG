@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>Remover moldura da janela</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Espera em segundos antes de começar gravando</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

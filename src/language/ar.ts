@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>إزالة إطار النافذة</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>الانتظار الثاني قبل التسجيل</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

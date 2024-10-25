@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>Šalinti lango rėmelį</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Luktelėti sekundėlę prieš įrašinėjant</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

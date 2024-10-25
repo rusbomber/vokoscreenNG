@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>Vensterrand verwijderen</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Aantal seconden voordat opname start</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

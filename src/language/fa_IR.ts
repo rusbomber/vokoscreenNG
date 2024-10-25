@@ -750,6 +750,10 @@
         <source>Remove window frame</source>
         <translation>حذف فریم دور پنچره</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>ثانیه صبر کن قبل از شروع ضبط</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>Odstrani okvir okna</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Čas čakanja pred začetkom snemanja</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

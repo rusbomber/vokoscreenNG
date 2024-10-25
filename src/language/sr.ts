@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>Уклони оквир прозора</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Одлагање снимања у секундама</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

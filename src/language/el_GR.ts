@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>Αφαίρεσε το πλαίσιο παραθύρου</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Δευτερόλεπτα αναμονής πριν την εγγραφή</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

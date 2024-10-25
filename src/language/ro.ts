@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>Șterge frame-urile</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Secunde înainte să pornească înregistrarea</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

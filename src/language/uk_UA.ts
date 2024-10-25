@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>Прибрати рамку вікна</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Зачекати секунд перед початком запису</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

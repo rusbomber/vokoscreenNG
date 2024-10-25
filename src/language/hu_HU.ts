@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>Távolítsa el az ablakkeretet</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Várakozás a rögzítés megkezdése előtt másodpercben</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>Eliminar a borda da janela</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Segundos para esperar antes de gravar</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

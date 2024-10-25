@@ -138,7 +138,7 @@
     <message>
         <source>No filemanager found.</source>
         <extracomment>Display a MessageBox, if not found a filemanager.</extracomment>
-        <translation>Administrador de archivos no valido</translation>
+        <translation>Administrador de archivos no encontrado.</translation>
     </message>
     <message>
         <source>Please install a filemanager.</source>
@@ -747,6 +747,10 @@
     <message>
         <source>Remove window frame</source>
         <translation>Quitar el marco de la ventana</translation>
+    </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Segundo de espera antes de la grabación</translation>
     </message>
 </context>
 <context>

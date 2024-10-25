@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>Supprimer le cadre de la fenêtre</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Seconde d&apos;attente avant démarrage de l&apos;enregistrement</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>Odstrániť orámovanie okna</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Čakanie v sekundách pred nahrávaním</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

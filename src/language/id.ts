@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>Hilangkan bingkai jendela</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Detik menunggu sebelum merekam</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

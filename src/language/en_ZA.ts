@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>Remove Window Capture</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Seconds to wait before Recording</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

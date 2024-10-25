@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>창틀 제거</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>몇 초 후 녹화 시작</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

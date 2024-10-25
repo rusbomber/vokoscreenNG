@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation> Терезе жақтауын жою</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Жазу алдында екінші рет күту</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>Ta bort fönsterram</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Vänta x sekunder före inspelningsstart</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

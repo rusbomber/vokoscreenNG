@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>移除視窗外框</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>開始錄製前等待秒數</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

@@ -750,6 +750,10 @@ El límite de espacio en disco se ha alcanzado.</translation>
         <source>Remove window frame</source>
         <translation>Remover el marco de la ventana</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Segundos de espera antes de grabar</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

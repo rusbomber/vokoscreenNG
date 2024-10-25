@@ -750,6 +750,10 @@
         <source>Remove window frame</source>
         <translation>Remove window frame</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Second wait before recording</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

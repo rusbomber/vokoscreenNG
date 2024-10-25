@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>Poista ikkunakehys</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>Sekuntia odotusta ennen tallennusta</translation>
+    </message>
 </context>
 <context>
     <name>license</name>

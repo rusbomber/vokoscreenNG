@@ -748,6 +748,10 @@
         <source>Remove window frame</source>
         <translation>ウィンドウ枠非表示</translation>
     </message>
+    <message>
+        <source>Second wait before recording</source>
+        <translation>録画前の秒数</translation>
+    </message>
 </context>
 <context>
     <name>license</name>
