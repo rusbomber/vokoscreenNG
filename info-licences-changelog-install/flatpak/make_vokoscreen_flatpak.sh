@@ -1,9 +1,9 @@
 #/usr/bin/sh
 
-rm -rf com.github.vkohaupt.vokoscreenNG
+# rm -rf com.github.vkohaupt.vokoscreenNG
 
-flatpak -y --user install org.kde.Sdk//6.6
-flatpak -y --user install org.kde.Platform//6.6
+flatpak -y --user install org.kde.Sdk//6.7
+flatpak -y --user install org.kde.Platform//6.7
 
 #git clone https://github.com/flathub/com.github.vkohaupt.vokoscreenNG
 mkdir com.github.vkohaupt.vokoscreenNG
