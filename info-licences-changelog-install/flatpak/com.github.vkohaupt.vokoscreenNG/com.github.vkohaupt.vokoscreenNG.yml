@@ -1,7 +1,10 @@
 app-id: com.github.vkohaupt.vokoscreenNG
-runtime: org.kde.Platform
-runtime-version: 6.7
-sdk: org.kde.Sdk
+# runtime: org.kde.Platform
+# runtime-version: 6.7
+# sdk: org.kde.Sdk
+runtime: org.freedesktop.Platform
+sdk: org.freedesktop.Sdk
+runtime-version: 24.08
 command: vokoscreenNG
 rename-desktop-file: vokoscreenNG.desktop
 rename-appdata-file: vokoscreenNG.appdata.xml
