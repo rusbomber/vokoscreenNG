@@ -451,6 +451,18 @@ QString QvkMainWindow_wl::get_Videocodec_Encoder()
         value = list.join( " " );
     }
 
+    if ( encoder == "gifenc" ) {
+         QStringList list;
+         list << "gifenc";
+         list << "speed=30";
+/*         if ( ui->checkBoxGifLoop->isChecked() ) {
+             list << "repeat=-1";
+         } else {
+             list << "repeat=0";
+         } */
+         value = list.join( " " );
+     }
+
     return value;
 }
 
@@ -463,6 +475,11 @@ QString QvkMainWindow_wl::get_Muxer()
     } else {
         value = ui->comboBoxFormat->currentData().toString() + " name=mux";
     }
+
+    if ( ui->comboBoxFormat->currentData().toString() == "gifenc" ) {
+        value = "";
+    }
+
     return value;
 }
 
@@ -682,8 +699,12 @@ void QvkMainWindow_wl::slot_start_gst( QString vk_fd, QString vk_path )
     if ( ui->radioButtonScreencastArea->isChecked() ) { stringList << get_Area_Videocrop(); }
     stringList << "video/x-raw, framerate=" + QString::number( sliderFrames->value() ) + "/1";
     stringList << get_Videocodec_Encoder();
-    stringList << "queue";
-    stringList << "mux.";
+
+    // Only if one or more audiodevice is selected
+    if ( ( VK_getSelectedAudioDevice().count() > 0 ) and ( ui->comboBoxAudioCodec->count() > 0 ) ) {
+        stringList << "queue";
+        stringList << "mux.";
+    }
 
     // Pipeline for one selected audiodevice
     if ( ( VK_getSelectedAudioDevice().count() == 1 ) and ( ui->comboBoxAudioCodec->count() > 0 ) )
@@ -719,6 +740,7 @@ void QvkMainWindow_wl::slot_start_gst( QString vk_fd, QString vk_path )
     }
 
     stringList << get_Muxer();
+    stringList.removeAll( "" );
 
     QString newVideoFilename = global::name + "-" + QDateTime::currentDateTime().toString( "yyyy-MM-dd_hh-mm-ss" ) + "." + ui->comboBoxFormat->currentText();
     stringList << "filesink location=\"" + ui->lineEditVideoPath->text() + "/" + newVideoFilename + "\"";
