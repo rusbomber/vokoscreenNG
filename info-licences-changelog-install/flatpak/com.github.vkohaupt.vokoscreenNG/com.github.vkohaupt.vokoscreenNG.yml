@@ -1,7 +1,4 @@
 app-id: com.github.vkohaupt.vokoscreenNG
-# runtime: org.kde.Platform
-# runtime-version: 6.7
-# sdk: org.kde.Sdk
 runtime: org.freedesktop.Platform
 sdk: org.freedesktop.Sdk
 runtime-version: 24.08
@@ -19,6 +16,42 @@ finish-args:
   - --filesystem=home
   - --talk-name=org.kde.StatusNotifierWatcher
   - --talk-name=org.freedesktop.Flatpak
+
+finish-args:
+  - --env=GI_TYPELIB_PATH=/app/lib/girepository-1.0
+  - --env=GST_PLUGIN_PATH=/app/lib/gstreamer-1.0:/usr/lib/extensions/gstreamer-1.0:/usr/lib/@@SDK_ARCH@@-linux-gnu/gstreamer-1.0
+  - --env=XDG_DATA_DIRS=/app/share:/usr/share:/usr/share/runtime/share:/run/host/user-share:/run/host/share
+  - --env=__EGL_EXTERNAL_PLATFORM_CONFIG_DIRS=/etc/egl/egl_external_platform.d:/usr/lib/@@SDK_ARCH@@-linux-gnu/GL/egl/egl_external_platform.d:/usr/share/egl/egl_external_platform.d
+  - --env=QT_PLUGIN_PATH=/app/lib64/plugins:/app/lib/plugins:/usr/share/runtime/lib/plugins
+  - --env=QML2_IMPORT_PATH=/app/lib64/qml:/app/lib/qml
+  - --env=KDE_FORK_SLAVES=1
+  - --env=PYTHONUSERBASE=/var/data/python
+  - --env=ALSA_CONFIG_PATH=/usr/share/alsa/alsa-flatpak.conf
+  - --env=ALSA_CONFIG_DIR=/usr/share/alsa
+  - --filesystem=xdg-config/kdeglobals:ro
+  - --talk-name=com.canonical.AppMenu.Registrar
+  - --talk-name=org.kde.kconfig.notify
+  - --talk-name=org.kde.KGlobalSettings
+  - --sdk=org.kde.Sdk//6.6
+  - --runtime=org.kde.Platform//6.6
+
+  - sdk-extensions:
+        org.freedesktop.Sdk.Debug
+        org.freedesktop.Sdk.Locale
+        org.freedesktop.Sdk.Docs
+  - platform-extensions:
+        org.freedesktop.Platform.Locale
+  - inherit-extensions:
+        org.freedesktop.Platform.GL
+        org.freedesktop.Platform.Timezones
+        org.freedesktop.Platform.GStreamer
+        org.freedesktop.Platform.Icontheme
+        org.freedesktop.Platform.VAAPI.Intel
+        org.freedesktop.Platform.openh264
+        org.freedesktop.Platform.VulkanLayer
+        org.gtk.Gtk3theme
+  - inherit-sdk-extensions:
+        org.freedesktop.Sdk.Extension
 
 modules:
   - name: qt6-qtbase
@@ -52,6 +85,7 @@ modules:
 
   - name: qt6-qtmultimedia
     buildsystem: cmake-ninja
+    cleanup-platform: /bin
     sources:
       - type: archive
         url: https://download.qt.io/official_releases/qt/6.7/6.7.3/submodules/qtmultimedia-everywhere-src-6.7.3.tar.xz
