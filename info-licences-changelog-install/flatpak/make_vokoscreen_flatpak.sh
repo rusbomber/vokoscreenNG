@@ -1,9 +1,9 @@
 #/usr/bin/sh
 
-# rm -rf com.github.vkohaupt.vokoscreenNG
+rm -rf com.github.vkohaupt.vokoscreenNG
 
-flatpak -y --user install org.freedesktop.Sdk//24.08
-flatpak -y --user install org.freedesktop.Platform//24.08
+flatpak -y --user install org.kde.Sdk//6.8
+flatpak -y --user install org.kde.Platform//6.8
 
 #git clone https://github.com/flathub/com.github.vkohaupt.vokoscreenNG
 mkdir com.github.vkohaupt.vokoscreenNG
@@ -13,5 +13,5 @@ cd com.github.vkohaupt.vokoscreenNG
 
 #flatpak-builder build-dir com.github.vkohaupt.vokoscreenNG.yml
 flatpak-builder --user --install --force-clean build-dir com.github.vkohaupt.vokoscreenNG.yml
-flatpak run com.github.vkohaupt.vokoscreenNG
+#flatpak run com.github.vkohaupt.vokoscreenNG
 

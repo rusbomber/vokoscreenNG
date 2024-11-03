@@ -1,0 +1,114 @@
+app-id: com.github.vkohaupt.vokoscreenNG
+runtime: org.freedesktop.Platform
+sdk: org.freedesktop.Sdk
+runtime-version: 24.08
+command: vokoscreenNG
+rename-desktop-file: vokoscreenNG.desktop
+rename-appdata-file: vokoscreenNG.appdata.xml
+rename-icon: vokoscreenNG
+finish-args:
+  - --device=all
+  - --share=ipc
+  - --share=network
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=pulseaudio
+  - --filesystem=home
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --talk-name=org.freedesktop.Flatpak
+  - --env=GI_TYPELIB_PATH=/app/lib/girepository-1.0
+  - --env=GST_PLUGIN_PATH=/app/lib/gstreamer-1.0:/usr/lib/extensions/gstreamer-1.0:/usr/lib/@@SDK_ARCH@@-linux-gnu/gstreamer-1.0
+  - --env=XDG_DATA_DIRS=/app/share:/usr/share:/usr/share/runtime/share:/run/host/user-share:/run/host/share
+  - --env=__EGL_EXTERNAL_PLATFORM_CONFIG_DIRS=/etc/egl/egl_external_platform.d:/usr/lib/@@SDK_ARCH@@-linux-gnu/GL/egl/egl_external_platform.d:/usr/share/egl/egl_external_platform.d
+  - --env=QT_PLUGIN_PATH=/app/lib64/plugins:/app/lib/plugins:/usr/share/runtime/lib/plugins
+  - --env=QML2_IMPORT_PATH=/app/lib64/qml:/app/lib/qml
+  - --env=KDE_FORK_SLAVES=1
+  - --env=PYTHONUSERBASE=/var/data/python
+  - --env=ALSA_CONFIG_PATH=/usr/share/alsa/alsa-flatpak.conf
+  - --env=ALSA_CONFIG_DIR=/usr/share/alsa
+  - --filesystem=xdg-config/kdeglobals:ro
+  - --talk-name=com.canonical.AppMenu.Registrar
+  - --talk-name=org.kde.kconfig.notify
+  - --talk-name=org.kde.KGlobalSettings
+  - sdk-extensions:
+        org.freedesktop.Sdk.Debug
+        org.freedesktop.Sdk.Locale
+        org.freedesktop.Sdk.Docs
+  - platform-extensions:
+        org.freedesktop.Platform.Locale
+  - inherit-extensions:
+        org.freedesktop.Platform.GL
+        org.freedesktop.Platform.Timezones
+        org.freedesktop.Platform.GStreamer
+        org.freedesktop.Platform.Icontheme
+        org.freedesktop.Platform.VAAPI.Intel
+        org.freedesktop.Platform.openh264
+        org.freedesktop.Platform.VulkanLayer
+        org.gtk.Gtk3theme
+  - inherit-sdk-extensions:
+        org.freedesktop.Sdk.Extension
+
+modules:
+  - name: qt6-qtbase
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DINSTALL_LIBDIR=/usr/lib/x86_64-linux-gnu
+    sources:
+      - type: archive
+        url: https://download.qt.io/official_releases/qt/6.7/6.7.3/submodules/qtbase-everywhere-src-6.7.3.tar.xz
+        sha256: 8ccbb9ab055205ac76632c9eeddd1ed6fc66936fc56afc2ed0fd5d9e23da3097
+    config-opts:
+      - -DQT_DISABLE_RPATH=ON
+      - -DBUILD_WITH_PCH=FALSE
+      - -DQT_FEATURE_openssl_linked=ON
+      - -DQT_FEATURE_system_sqlite=ON
+
+  - name: qt6-qttools
+    buildsystem: cmake-ninja
+    # cleanup-platform: /bin/lrelease,/bin/lupdate
+    sources:
+      - type: archive
+        url: https://download.qt.io/official_releases/qt/6.7/6.7.3/submodules/qttools-everywhere-src-6.7.3.tar.xz
+        sha256: f03bb7df619cd9ac9dba110e30b7bcab5dd88eb8bdc9cc752563b4367233203f
+
+  - name: qt6-shadertools
+    buildsystem: cmake-ninja
+    sources:
+      - type: archive
+        url: https://download.qt.io/official_releases/qt/6.7/6.7.3/submodules/qtshadertools-everywhere-src-6.7.3.tar.xz
+        sha256: 74e512798c7ddbda354a2d8d975211454bbabb47afb7e598892067a5828c0995
+
+  - name: qt6-qtmultimedia
+    buildsystem: cmake-ninja
+    cleanup-platform: /bin
+    sources:
+      - type: archive
+        url: https://download.qt.io/official_releases/qt/6.7/6.7.3/submodules/qtmultimedia-everywhere-src-6.7.3.tar.xz
+        sha256: 304d28b8e592435293893b0110d5f3534407604d1e04d8a0b0e5b34afe577303
+
+  - name: vokoscreenNG
+    buildsystem: qmake
+    subdir: src
+    post-install:
+      - install -Dm755 vokoscreenNG ${FLATPAK_DEST}/bin/vokoscreenNG
+      - install -Dm644 applications/vokoscreenNG.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/vokoscreenNG.png
+      - install -Dm644 applications/vokoscreenNG.desktop ${FLATPAK_DEST}/share/applications/vokoscreenNG.desktop
+      - install -Dm644 ../vokoscreenNG.appdata.xml ${FLATPAK_DEST}/share/metainfo/vokoscreenNG.appdata.xml
+#    sources:
+#      - type: git
+#        url: https://github.com/vkohaupt/vokoscreenNG.git
+#        tag: 3.0
+#        commit: 9bdc85afff5568f0f1620b8380783a7c203f7ba0
+#        x-checker-data:
+#          type: git
+#          tag-pattern: ^([\d.]+)$
+#      - type: file
+#        path: vokoscreenNG.appdata.xml
+    sources:
+       - type: dir
+         path: "/home/vk/Programmieren/vokoscreenNG/"
+       - type: file
+         path: vokoscreenNG.appdata.xml
+
+
+
