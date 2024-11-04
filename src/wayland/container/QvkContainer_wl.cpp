@@ -134,11 +134,11 @@ QvkContainer_wl::QvkContainer_wl(QObject *parent) : QObject(parent)
 
     Containers = new QList<Container_wl*>;
     Containers->append( MKV );
+    Containers->append( GIF );
+    Containers->append( MP4 );
     Containers->append( WEBM );
     Containers->append( AVI );
-    Containers->append( MP4 );
     Containers->append( MOV );
-    Containers->append( GIF );
 }
 
 /*!
