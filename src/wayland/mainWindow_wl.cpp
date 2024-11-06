@@ -59,6 +59,10 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
 
     ui->setupUi( this );
 
+    // Inhalt von tab Video in Tab 1 verschieben und Tab Video ausblenden
+    ui->verticalLayout_7->insertWidget( 4, ui->widget );
+    ui->tabWidgetScreencast->removeTab(1);
+
     ui->verticalLayout_9->insertWidget( 0, global::textBrowserLog );
 
     QFile fileCSS( ":/pictures/css/css.qss" );
@@ -109,12 +113,12 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
     ui->labelLanguageUrl->setText( "<a href='https://app.transifex.com/vkohaupt/vokoscreen/'>" + tr( "Translations" ) + "</a>" );
     ui->labelDonateUrl->setText( "<a href='https://linuxecke.volkoh.de/vokoscreen/vokoscreen-donate.html'>" + tr( "Donate" ) + "</a>" );
 
-    ui->pushButtonPause->hide();
-    ui->pushButtonContinue->hide();
-    ui->pushButtonPlay->hide();
-    ui->pushButtonScreencastOpenfolder->hide();
     ui->help_screencast_audiocodec->hide();
     ui->help_screencast_audio->hide();
+    ui->help_screencast_frames->hide();
+    ui->help_screencast_nomousecursor->hide();
+    ui->help_screencast_format->hide();
+    ui->help_screencast_videocodec->hide();
     ui->frame_cisco->hide();
     ui->line_cisco->hide();
     ui->label_Upate_tab_2->hide();
@@ -144,6 +148,7 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
     }
 
     vkSettings.readAll( ui, this );
+
  }
 
 
@@ -345,6 +350,8 @@ void QvkMainWindow_wl::set_Connects()
     connect( ui->pushButtonSnapshot, SIGNAL( clicked(bool) ), this, SLOT( slot_pushButton_snapshot(bool) ) );
 
     connect( ui->pushButton_log_openfolder, SIGNAL( clicked(bool) ), this, SLOT( slot_logFolder() ) );
+
+    connect( ui->comboBoxVideoCodec, SIGNAL( currentTextChanged(QString) ), this, SLOT( slot_videoCodecChanged(QString) ) );
 }
 
 
@@ -464,6 +471,31 @@ QString QvkMainWindow_wl::get_Videocodec_Encoder()
      }
 
     return value;
+}
+
+
+void QvkMainWindow_wl::slot_videoCodecChanged( QString codec )
+{
+    ui->frameVideoCodecx264->setVisible( false );
+    ui->frameVideoCodecOpenh264->setVisible( false );
+    ui->frameVideoCodecVp8->setVisible( false );
+    ui->frameVideoCodecGIF->setVisible( false );
+
+    if ( codec == "x264" ) {
+        ui->frameVideoCodecx264->setVisible( true );
+    }
+
+    if ( codec == "H.264" ) {
+        ui->frameVideoCodecOpenh264->setVisible( true );
+    }
+
+    if ( codec == "VP8" ) {
+        ui->frameVideoCodecVp8->setVisible( true );
+    }
+
+    if ( codec == "gif" ) {
+        ui->frameVideoCodecGIF->setVisible( true );
+    }
 }
 
 
@@ -873,7 +905,7 @@ void QvkMainWindow_wl::set_SpezialSliders()
     sliderScreencastCountDown->show();
 
     sliderFrames = new QvkSpezialSlider( Qt::Horizontal );
-    ui->horizontalLayout_slider_frames->insertWidget( 0, sliderFrames );
+    ui->horizontalLayout_33->insertWidget( 0, sliderFrames );
     sliderFrames->setObjectName( "sliderFrames" );
     sliderFrames->setTracking( true );
     sliderFrames->setMinimum( 10 );
@@ -889,6 +921,35 @@ void QvkMainWindow_wl::set_SpezialSliders()
     sliderSecondWaitBeforeRecording->setValue( 1 );
     sliderSecondWaitBeforeRecording->setPageStep( 1 );
     sliderSecondWaitBeforeRecording->show();
+
+    sliderX264 = new QvkSpezialSlider( Qt::Horizontal );
+    ui->horizontalLayout_26->insertWidget( 1, sliderX264 );
+    sliderX264->setObjectName( "sliderX264" );
+    sliderX264->setTracking( true );
+    sliderX264->setMinimum( 0 );
+    sliderX264->setMaximum( 50 );
+    sliderX264->setValue( 17 );
+    sliderX264->show();
+
+    sliderOpenh264 = new QvkSpezialSlider( Qt::Horizontal );
+    ui->horizontalLayout_openh264->insertWidget( 1, sliderOpenh264 );
+    sliderOpenh264->setObjectName( "sliderOpenh264" );
+    sliderOpenh264->setTracking( true );
+    sliderOpenh264->setMinimum( 1 ); // we need minimum 1, with 0 we get wrong colors.
+    sliderOpenh264->setMaximum( 51 );
+    sliderOpenh264->setValue( 23 );
+    sliderOpenh264->show();
+
+    sliderVp8 = new QvkSpezialSlider( Qt::Horizontal );
+    ui->horizontalLayout_vp8->insertWidget( 1, sliderVp8 );
+    sliderVp8->setObjectName( "sliderVp8" );
+    sliderVp8->setTracking( true );
+    sliderVp8->setMinimum( 0 );
+    sliderVp8->setMaximum( 63 );
+    sliderVp8->setValue( 20 );
+    sliderVp8->show();
+
+
 }
 
 

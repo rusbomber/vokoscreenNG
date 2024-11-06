@@ -37,6 +37,9 @@ public:
     QvkSpezialSlider *sliderFrames;
     QvkSpezialSlider *sliderScreencastCountDown;
     QvkSpezialSlider *sliderSecondWaitBeforeRecording;
+    QvkSpezialSlider *sliderOpenh264;
+    QvkSpezialSlider *sliderX264;
+    QvkSpezialSlider *sliderVp8;
 
 
 private:
@@ -95,6 +98,7 @@ private Q_SLOTS:
     void slot_path_to_snapshot_folder( bool bo );
     // Snapshot
 
+    void slot_videoCodecChanged( QString codec );
 
 protected:
     void closeEvent( QCloseEvent *event );

@@ -1817,6 +1817,7 @@ QString QvkMainWindow::Vk_get_Videocodec_Encoder()
         QStringList list;
         list << "gifenc";
         list << "speed=30";
+//        list << "min-force-key-unit-interval=3000000000";
         if ( ui->checkBoxGifLoop->isChecked() ) {
             list << "repeat=-1";
         } else {
