@@ -41,15 +41,10 @@ void Container_wl::set_MuxerAvailable( bool available )
 
 void Container_wl::add_VideoCodec( QString encoder, QString name )
 {
-#ifdef Q_OS_WIN
-    if ( encoder != "x264enc" )
-#endif
-    {
-        VideoCodec_wl videoCodec;
-        videoCodec.encoder = encoder;
-        videoCodec.name = name;
-        VideoCodecs.append( videoCodec );
-    }
+    VideoCodec_wl videoCodec;
+    videoCodec.encoder = encoder;
+    videoCodec.name = name;
+    VideoCodecs.append( videoCodec );
 }
 
 void Container_wl::add_AudioCodec( QString encoder, QString  name )
@@ -92,9 +87,6 @@ QvkContainer_wl::QvkContainer_wl(QObject *parent) : QObject(parent)
     Container_wl *MKV = new Container_wl( "matroskamux", "mkv" );
     MKV->add_VideoCodec( "openh264enc", "H.264" );
     MKV->add_VideoCodec( "vp8enc", "VP8");
-    if ( QSysInfo::prettyProductName().contains( "Flatpak" ) == false ) {
-        MKV->add_VideoCodec( "x264enc", "x264");
-    }
     MKV->add_AudioCodec( "vorbisenc", "vorbis" );
     MKV->add_AudioCodec( "flacenc", "flac" );
     MKV->add_AudioCodec( "opusenc", "opus" );
@@ -107,25 +99,16 @@ QvkContainer_wl::QvkContainer_wl(QObject *parent) : QObject(parent)
 
     Container_wl *AVI = new Container_wl( "avimux", "avi" );
     AVI->add_VideoCodec( "openh264enc", "H.264" );
-    if ( QSysInfo::prettyProductName().contains( "Flatpak" ) == false ) {
-        AVI->add_VideoCodec( "x264enc", "x264");
-    }
     AVI->add_VideoCodec( "vp8enc", "VP8" );
     AVI->add_AudioCodec( "lamemp3enc", "mp3" );
 
     Container_wl *MP4 = new Container_wl( "mp4mux", "mp4" );
     MP4->add_VideoCodec( "openh264enc", "H.264" );
-    if ( QSysInfo::prettyProductName().contains( "Flatpak" ) == false ) {
-        MP4->add_VideoCodec( "x264enc", "x264");
-    }
     MP4->add_AudioCodec( "lamemp3enc", "mp3" );
     MP4->add_AudioCodec( "opusenc", "opus" );
 
     Container_wl *MOV = new Container_wl( "qtmux", "mov" );
     MOV->add_VideoCodec( "openh264enc", "H.264" );
-    if ( QSysInfo::prettyProductName().contains( "Flatpak" ) == false ) {
-        MOV->add_VideoCodec( "x264enc", "x264");
-    }
     MOV->add_VideoCodec( "vp8enc", "VP8" );
     MOV->add_AudioCodec( "lamemp3enc", "mp3" );
 

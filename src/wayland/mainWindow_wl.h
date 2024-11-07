@@ -88,6 +88,8 @@ private Q_SLOTS:
     void slot_start_gst( QString vk_fd, QString vk_path );
     void slot_stop();
     void slot_frames_Reset();
+    void slot_openh264Reset();
+    void slot_vp8Reset();
     void slot_newVideoPath();
     void slot_videoFileSystemWatcherSetNewPath();
     void slot_logFolder();

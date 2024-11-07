@@ -346,6 +346,8 @@ void QvkMainWindow_wl::set_Connects()
 
     connect( ui->toolButtonScreencastAreaReset, SIGNAL( clicked(bool) ), vkRegionChoise_wl, SLOT( slot_areaReset() ) );
     connect( ui->toolButtonFramesReset,         SIGNAL( clicked(bool) ), this,              SLOT( slot_frames_Reset() ) );
+    connect( ui->toolButtonOpenh264Reset,       SIGNAL( clicked(bool) ), this, SLOT( slot_openh264Reset() ) );
+    connect( ui->toolButtonVP8Reset,            SIGNAL( clicked(bool) ), this, SLOT( slot_vp8Reset() ) );
 
     connect( ui->pushButtonSnapshot, SIGNAL( clicked(bool) ), this, SLOT( slot_pushButton_snapshot(bool) ) );
 
@@ -956,6 +958,18 @@ void QvkMainWindow_wl::set_SpezialSliders()
 void QvkMainWindow_wl::slot_frames_Reset()
 {
     sliderFrames->setValue( 25 );
+}
+
+
+void QvkMainWindow_wl::slot_openh264Reset()
+{
+    sliderOpenh264->setValue( 23 );
+}
+
+
+void QvkMainWindow_wl::slot_vp8Reset()
+{
+    sliderVp8->setValue( 20 );
 }
 
 
