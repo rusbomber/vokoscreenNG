@@ -464,11 +464,11 @@ QString QvkMainWindow_wl::get_Videocodec_Encoder()
          QStringList list;
          list << "gifenc";
          list << "speed=30";
-/*         if ( ui->checkBoxGifLoop->isChecked() ) {
+         if ( ui->checkBoxGifLoop->isChecked() ) {
              list << "repeat=-1";
          } else {
              list << "repeat=0";
-         } */
+         }
          value = list.join( " " );
      }
 
