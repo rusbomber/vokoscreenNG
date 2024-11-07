@@ -38,7 +38,6 @@ public:
     QvkSpezialSlider *sliderScreencastCountDown;
     QvkSpezialSlider *sliderSecondWaitBeforeRecording;
     QvkSpezialSlider *sliderOpenh264;
-    QvkSpezialSlider *sliderX264;
     QvkSpezialSlider *sliderVp8;
 
 

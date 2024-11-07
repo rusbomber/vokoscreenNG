@@ -478,14 +478,9 @@ QString QvkMainWindow_wl::get_Videocodec_Encoder()
 
 void QvkMainWindow_wl::slot_videoCodecChanged( QString codec )
 {
-    ui->frameVideoCodecx264->setVisible( false );
     ui->frameVideoCodecOpenh264->setVisible( false );
     ui->frameVideoCodecVp8->setVisible( false );
     ui->frameVideoCodecGIF->setVisible( false );
-
-    if ( codec == "x264" ) {
-        ui->frameVideoCodecx264->setVisible( true );
-    }
 
     if ( codec == "H.264" ) {
         ui->frameVideoCodecOpenh264->setVisible( true );
@@ -923,15 +918,6 @@ void QvkMainWindow_wl::set_SpezialSliders()
     sliderSecondWaitBeforeRecording->setValue( 1 );
     sliderSecondWaitBeforeRecording->setPageStep( 1 );
     sliderSecondWaitBeforeRecording->show();
-
-    sliderX264 = new QvkSpezialSlider( Qt::Horizontal );
-    ui->horizontalLayout_26->insertWidget( 1, sliderX264 );
-    sliderX264->setObjectName( "sliderX264" );
-    sliderX264->setTracking( true );
-    sliderX264->setMinimum( 0 );
-    sliderX264->setMaximum( 50 );
-    sliderX264->setValue( 17 );
-    sliderX264->show();
 
     sliderOpenh264 = new QvkSpezialSlider( Qt::Horizontal );
     ui->horizontalLayout_openh264->insertWidget( 1, sliderOpenh264 );
