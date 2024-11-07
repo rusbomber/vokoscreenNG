@@ -438,17 +438,6 @@ QString QvkMainWindow_wl::get_Videocodec_Encoder()
         value.append( " ! h264parse" );
     }
 
-    if ( encoder == "x264enc" ) {
-        QStringList list;
-        list << encoder;
-        list << "qp-min=17"; // + QString::number( sliderOpenh264->value() );
-        list << "qp-max=17"; // + QString::number( sliderOpenh264->value() );
-        list << "speed-preset=superfast";
-        list << "threads=" + QString::number( QThread::idealThreadCount() );
-        value = list.join( " " );
-        value.append( " ! video/x-h264, profile=baseline" );
-    }
-
     if ( encoder == "vp8enc" ) {
         QStringList list;
         list << encoder;
