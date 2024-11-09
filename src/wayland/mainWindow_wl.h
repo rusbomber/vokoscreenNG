@@ -110,8 +110,6 @@ protected:
 signals:
     void signal_newVideoFilename( QString );
     void signal_beginRecordTime( QString );
-    void signal_wait(bool);
-
 
 };
 
