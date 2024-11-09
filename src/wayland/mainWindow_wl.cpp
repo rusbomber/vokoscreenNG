@@ -25,6 +25,7 @@
 #include <QGuiApplication>
 #include <QDesktopServices>
 #include <QProcess>
+#include <QTimer>
 
 // Snapshot
 #include <QDBusConnection>
@@ -349,7 +350,7 @@ void QvkMainWindow_wl::set_Connects()
     connect( ui->toolButtonOpenh264Reset,       SIGNAL( clicked(bool) ), this, SLOT( slot_openh264Reset() ) );
     connect( ui->toolButtonVP8Reset,            SIGNAL( clicked(bool) ), this, SLOT( slot_vp8Reset() ) );
 
-    connect( ui->pushButtonSnapshot, SIGNAL( clicked(bool) ), this, SLOT( slot_pushButton_snapshot(bool) ) );
+    connect( ui->pushButtonSnapshot, SIGNAL( clicked(bool) ), this, SLOT( slot_snapshotHideBeforeRecording(bool) ) );
 
     connect( ui->pushButton_log_openfolder, SIGNAL( clicked(bool) ), this, SLOT( slot_logFolder() ) );
 
@@ -357,9 +358,22 @@ void QvkMainWindow_wl::set_Connects()
 }
 
 
-void QvkMainWindow_wl::slot_pushButton_snapshot( bool bo )
-{
+void QvkMainWindow_wl::slot_snapshotHideBeforeRecording( bool bo ) {
     Q_UNUSED(bo)
+    if ( ui->checkBoxSnapshotHideBeforeRecording->isChecked() == true ) {
+        qDebug().noquote() << global::nameOutput << "[Snapshot]" << "checkBoxSnapshotHideBeforeRecording is checked";
+        showMinimized();
+        QvkSpezialSlider *spezialSlider = ui->centralwidget->findChild<QvkSpezialSlider *>( "sliderWaitBeforeSnapshot" );
+        QTimer::singleShot( spezialSlider->value() * 100, Qt::PreciseTimer, this, SLOT( slot_pushButton_snapshot() ) );
+    } else {
+        qDebug().noquote() << global::nameOutput << "[Snapshot]" << "checkBoxSnapshotHideBeforeRecording is not checked";
+        slot_pushButton_snapshot();
+    }
+}
+
+
+void QvkMainWindow_wl::slot_pushButton_snapshot()
+{
     // https://pythonhosted.org/txdbus/dbus_overview.html
     // https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Screenshot.html#
     QDBusConnection bus = QDBusConnection::sessionBus();
@@ -926,7 +940,14 @@ void QvkMainWindow_wl::set_SpezialSliders()
     sliderVp8->setValue( 20 );
     sliderVp8->show();
 
-
+    sliderWaitBeforeSnapshot = new QvkSpezialSlider( Qt::Horizontal );
+    ui->horizontalLayout_59->insertWidget( 1, sliderWaitBeforeSnapshot );
+    sliderWaitBeforeSnapshot->setObjectName( "sliderWaitBeforeSnapshot" );
+    sliderWaitBeforeSnapshot->setMinimum( 0 );
+    sliderWaitBeforeSnapshot->setMaximum( 30 );
+    sliderWaitBeforeSnapshot->setValue( 4 );
+    sliderWaitBeforeSnapshot->setDecimalPoint( true );
+    sliderWaitBeforeSnapshot->show();
 }
 
 

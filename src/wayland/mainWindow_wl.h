@@ -39,6 +39,7 @@ public:
     QvkSpezialSlider *sliderSecondWaitBeforeRecording;
     QvkSpezialSlider *sliderOpenh264;
     QvkSpezialSlider *sliderVp8;
+    QvkSpezialSlider *sliderWaitBeforeSnapshot;
 
 
 private:
@@ -94,7 +95,8 @@ private Q_SLOTS:
     void slot_logFolder();
 
     // Snapshot
-    void slot_pushButton_snapshot( bool bo );
+    void slot_snapshotHideBeforeRecording( bool bo );
+    void slot_pushButton_snapshot();
     void slot_handle_response_snapshot( uint responseCode, QVariantMap results );
     void slot_path_to_snapshot_folder( bool bo );
     // Snapshot
@@ -108,6 +110,7 @@ protected:
 signals:
     void signal_newVideoFilename( QString );
     void signal_beginRecordTime( QString );
+    void signal_wait(bool);
 
 
 };

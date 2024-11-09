@@ -201,7 +201,7 @@
          <enum>QTabWidget::West</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="tab_sidebar_screeancast">
          <attribute name="title">
@@ -557,8 +557,8 @@
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>409</width>
-                          <height>87</height>
+                          <width>16</width>
+                          <height>16</height>
                          </rect>
                         </property>
                         <property name="accessibleName">
@@ -1479,8 +1479,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>449</width>
-                     <height>360</height>
+                     <width>20</width>
+                     <height>98</height>
                     </rect>
                    </property>
                    <layout class="QGridLayout" name="gridLayoutAvailable">
@@ -2683,6 +2683,27 @@
                  <string notr="true">Interactive</string>
                 </property>
                </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="checkBoxSnapshotHideBeforeRecording">
+                <property name="text">
+                 <string>Hide this window</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_59">
+                <item>
+                 <widget class="QLabel" name="label_60">
+                  <property name="text">
+                   <string>Seconds wait before recording</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
               <item>
                <spacer name="verticalSpacer_7">
