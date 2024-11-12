@@ -77,6 +77,10 @@ private:
 
     static GstBusSyncReply call_bus_message( GstBus *bus, GstMessage *message, gpointer user_data );
 
+    // Snapshot
+    void supportedImageFormats();
+    // Snapshot
+
 
 public Q_SLOTS:
 

@@ -26,6 +26,7 @@
 #include <QDesktopServices>
 #include <QProcess>
 #include <QTimer>
+#include <QImageWriter>
 
 // Snapshot
 #include <QDBusConnection>
@@ -59,6 +60,8 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
     }
 
     ui->setupUi( this );
+
+    supportedImageFormats();
 
     // Inhalt von tab Video in Tab 1 verschieben und Tab Video ausblenden
     ui->verticalLayout_7->insertWidget( 4, ui->widget );
@@ -413,7 +416,7 @@ void QvkMainWindow_wl::slot_handle_response_snapshot( uint responseCode, QVarian
                 "-" +
                 QDateTime::currentDateTime().toString( "yyyy-MM-dd_hh-mm-ss.zzz" ) +
                 "." +
-                "png";
+                ui->comboBoxSnapshotImageFormats->currentText().toUtf8();
         pixmap.save( filePath_new );
 
         QFile file( filePath_org );
@@ -447,6 +450,18 @@ void QvkMainWindow_wl::slot_path_to_snapshot_folder( bool bo )
     }
 }
 
+
+void QvkMainWindow_wl::supportedImageFormats()
+{
+    QList<QByteArray> listFormats = QImageWriter::supportedImageFormats();
+    if ( listFormats.empty() == false ) {
+        for ( int x = 0; x < listFormats.count(); x++ ) {
+            ui->comboBoxSnapshotImageFormats->addItem( QString( listFormats.at(x) ) );
+        }
+    }
+
+    ui->comboBoxSnapshotImageFormats->setCurrentIndex( ui->comboBoxSnapshotImageFormats->findText( "png" ) );
+}
 
 QString QvkMainWindow_wl::get_Videocodec_Encoder()
 {
