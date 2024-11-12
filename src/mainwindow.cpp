@@ -401,6 +401,19 @@ QvkMainWindow::QvkMainWindow(QWidget *parent) : QMainWindow(parent),
     connect( ui->pushButtonStop, SIGNAL( clicked(bool) ), ui->comboBoxScreencastScreenArea, SLOT( setDisabled(bool) ) );
     connect( ui->pushButtonStop, SIGNAL( clicked(bool) ), ui->toolButtonScreencastAreaReset, SLOT( setDisabled(bool) ) );
     connect( ui->pushButtonStop, &QPushButton::clicked, this, [=]() { lastButtonPressed = "start"; } );
+    connect( ui->pushButtonStop, &QPushButton::clicked, this, [=]() {
+        if ( ui->radioButtonScreencastFullscreen->isChecked() == true ) {
+            ui->comboBoxScreencastScreenArea->setDisabled( true );
+        }
+        if ( ui->radioButtonScreencastWindow->isChecked() == true ) {
+            ui->comboBoxScreencastScreenArea->setDisabled( true );
+            ui->comboBoxScreencastScreen->setDisabled( true );
+            ui->toolButtonScreencastAreaReset->setDisabled( true );
+        }
+        if ( ui->radioButtonScreencastArea->isChecked() == true ) {
+            ui->comboBoxScreencastScreen->setDisabled( true );
+        }
+    } );
 
     connect( ui->pushButtonPause, SIGNAL( clicked(bool) ), this,                   SLOT( slot_Pause() ) );
     connect( ui->pushButtonPause, SIGNAL( clicked(bool) ), ui->pushButtonPause,    SLOT( hide() ) );

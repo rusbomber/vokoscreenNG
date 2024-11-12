@@ -463,6 +463,7 @@ void QvkMainWindow_wl::supportedImageFormats()
     ui->comboBoxSnapshotImageFormats->setCurrentIndex( ui->comboBoxSnapshotImageFormats->findText( "png" ) );
 }
 
+
 QString QvkMainWindow_wl::get_Videocodec_Encoder()
 {
     QString value;
