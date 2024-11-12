@@ -361,12 +361,12 @@ void QvkMainWindow_wl::set_Connects()
 void QvkMainWindow_wl::slot_snapshotHideBeforeRecording( bool bo ) {
     Q_UNUSED(bo)
     if ( ui->checkBoxSnapshotHideBeforeRecording->isChecked() == true ) {
-        qDebug().noquote() << global::nameOutput << "[Snapshot]" << "checkBoxSnapshotHideBeforeRecording is checked";
+        qDebug().noquote() << global::nameOutput << "[Snapshot]" << "Hide this window is checked";
         showMinimized();
         QvkSpezialSlider *spezialSlider = ui->centralwidget->findChild<QvkSpezialSlider *>( "sliderWaitBeforeSnapshot" );
         QTimer::singleShot( spezialSlider->value() * 100, Qt::PreciseTimer, this, SLOT( slot_pushButton_snapshot() ) );
     } else {
-        qDebug().noquote() << global::nameOutput << "[Snapshot]" << "checkBoxSnapshotHideBeforeRecording is not checked";
+        qDebug().noquote() << global::nameOutput << "[Snapshot]" << "Hide this window is not checked";
         slot_pushButton_snapshot();
     }
 }
@@ -402,16 +402,30 @@ void QvkMainWindow_wl::slot_handle_response_snapshot( uint responseCode, QVarian
         QUrl url( results["uri"].toString() );
         QFileInfo fileInfo( url.toLocalFile() );
         path_to_snapshot_folder = fileInfo.absolutePath();
+        QString filePath_org = fileInfo.absoluteFilePath();
         disconnect( ui->pushButtonSnapshotOpenFolder, nullptr, nullptr, nullptr );
         connect( ui->pushButtonSnapshotOpenFolder, SIGNAL( clicked(bool) ), this, SLOT( slot_path_to_snapshot_folder(bool) ) );
-        qDebug().noquote() << global::nameOutput << "[Snapshot] Saved under the following path:" << url.toLocalFile();
+
+        QPixmap pixmap = QPixmap( filePath_org );
+        QString filePath_new = path_to_snapshot_folder +
+                "/" +
+                global::name +
+                "-" +
+                QDateTime::currentDateTime().toString( "yyyy-MM-dd_hh-mm-ss.zzz" ) +
+                "." +
+                "png";
+        pixmap.save( filePath_new );
+
+        QFile file( filePath_org );
+        file.remove();
 
         QvkShowMessage_wl *vkShowMessage_wl = new QvkShowMessage_wl();
         vkShowMessage_wl->set_StatusIcon( ":/pictures/status/information.png" );
-        vkShowMessage_wl->set_Image( url.toLocalFile() );
+        vkShowMessage_wl->set_Image( filePath_new );
         vkShowMessage_wl->set_timeOut( 10000 );
         vkShowMessage_wl->showMessage( "" );
 
+        qDebug().noquote() << global::nameOutput << "[Snapshot] Saved under:" << filePath_new;
     } else {
         qDebug().noquote() << global::nameOutput << "[Snapshot] Unable to take a screenshot" << results["uri"];
     }
