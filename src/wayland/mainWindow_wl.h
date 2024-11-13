@@ -9,7 +9,7 @@
 #include "QvkCountdown_wl.h"
 
 #include "QvkSpezialSlider.h"
-#include "QvkLogController.h"
+#include "QvkLogController_wl.h"
 
 #include <QMainWindow>
 #include <QTranslator>
@@ -47,7 +47,7 @@ private:
     QTranslator translator;
     QTranslator qtTranslator;
     QvkRegionChoise_wl *vkRegionChoise_wl;
-    QvkLogController *vklogController;
+    QvkLogController_wl *vkLogController;
     GstElement *pipeline = nullptr;
     QStringList videoFormatsList;
     QFileSystemWatcher *videoFileSystemWatcher;
@@ -106,6 +106,8 @@ private Q_SLOTS:
     // Snapshot
 
     void slot_videoCodecChanged( QString codec );
+
+    void slot_test();
 
 protected:
     void closeEvent( QCloseEvent *event );

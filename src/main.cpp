@@ -33,6 +33,7 @@
 
 #ifdef Q_OS_UNIX
 #include "mainWindow_wl.h"
+#include "QvkLogController_wl.h"
 #include "QvkWaylandRoutines.h"
 #endif
 

@@ -61,13 +61,13 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
 
     ui->setupUi( this );
 
+    vkLogController = new QvkLogController_wl;
+
     supportedImageFormats();
 
     // Inhalt von tab Video in Tab 1 verschieben und Tab Video ausblenden
     ui->verticalLayout_8->insertWidget( 0, ui->widget );
     ui->tabWidgetScreencast->removeTab(1);
-
-    ui->verticalLayout_9->insertWidget( 0, global::textBrowserLog );
 
     QFile fileCSS( ":/pictures/css/css.qss" );
     fileCSS.open( QFile::ReadOnly | QFile::Text );
@@ -153,7 +153,18 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
 
     vkSettings.readAll( ui, this );
 
+    connect( ui->pushButton, SIGNAL( clicked(bool) ), this, SLOT( slot_test() ) );
  }
+
+
+void QvkMainWindow_wl::slot_test()
+{
+    QFile file( vkLogController->get_logPath() );
+    file.open( QIODevice::ReadOnly );
+    QTextStream in( &file );
+    ui->textBrowser->clear();
+    ui->textBrowser->setText( in.readAll() );
+}
 
 
 QvkMainWindow_wl::~QvkMainWindow_wl()
@@ -272,7 +283,7 @@ void QvkMainWindow_wl::get_system_info()
     qDebug().noquote() << global::nameOutput << "Qt-TranslationsPath:" << QLibraryInfo::path( QLibraryInfo::TranslationsPath );
     qDebug().noquote() << global::nameOutput << "Qt-LibraryPath:     " << QLibraryInfo::path( QLibraryInfo::LibrariesPath );
 //    qDebug().noquote() << global::nameOutput << "Settings:" << vkSettings.getFileName();
-    qDebug().noquote() << global::nameOutput << "Log:" << vklogController->get_logPath();
+    qDebug().noquote() << global::nameOutput << "Log:" << vkLogController->get_logPath();
     qDebug().noquote() << global::nameOutput << "Default Videopath:" << QStandardPaths::writableLocation( QStandardPaths::MoviesLocation );
 //    qDebug().noquote() << global::nameOutput << "User Videopath:" << vkSettings.getVideoPath();
     qDebug().noquote();
@@ -1105,7 +1116,7 @@ void QvkMainWindow_wl::slot_videoFileSystemWatcherSetNewPath()
 
 void QvkMainWindow_wl::slot_logFolder()
 {
-    QUrl url( vklogController->get_logPath() );
+    QUrl url( vkLogController->get_logPath() );
     QString path = url.adjusted( QUrl::RemoveFilename ).toString();
 
     if ( QDesktopServices::openUrl( QUrl( "file:///" + path, QUrl::TolerantMode ) ) == false ) {
