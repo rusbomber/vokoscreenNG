@@ -249,7 +249,7 @@ QString Portal_wl::createSessionToken() const
     static int sessionTokenCounter = 0;
 
     sessionTokenCounter += 1;
-    return QString( "vosess%1" ).arg( sessionTokenCounter );
+    return QString( "vokosess%1" ).arg( sessionTokenCounter );
 
 }
 
@@ -258,5 +258,5 @@ QString Portal_wl::createRequestToken() const
     static int requestTokenCounter = 0;
 
     requestTokenCounter += 1;
-    return QString( "voreq%1" ).arg( requestTokenCounter );
+    return QString( "vokoreq%1" ).arg( requestTokenCounter );
 }
