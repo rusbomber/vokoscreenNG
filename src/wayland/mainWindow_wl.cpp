@@ -64,7 +64,7 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
     supportedImageFormats();
 
     // Inhalt von tab Video in Tab 1 verschieben und Tab Video ausblenden
-    ui->verticalLayout_7->insertWidget( 4, ui->widget );
+    ui->verticalLayout_8->insertWidget( 0, ui->widget );
     ui->tabWidgetScreencast->removeTab(1);
 
     ui->verticalLayout_9->insertWidget( 0, global::textBrowserLog );
