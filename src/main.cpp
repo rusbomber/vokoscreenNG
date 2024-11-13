@@ -33,7 +33,6 @@
 
 #ifdef Q_OS_UNIX
 #include "mainWindow_wl.h"
-#include "QvkLogController_wl.h"
 #include "QvkWaylandRoutines.h"
 #endif
 
@@ -49,6 +48,7 @@ int main(int argc, char *argv[])
     QApplication::setStyle( QStyleFactory::create( "Fusion" ) );
     QApplication app(argc, argv);
 
+    // This is for X11 and Windows. Wayland has a own logger.
     global::textBrowserLog = new QTextBrowser;
     QvkLogController *vklogController = new QvkLogController;
 
