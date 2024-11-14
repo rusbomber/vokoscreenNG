@@ -97,6 +97,7 @@ private Q_SLOTS:
     void slot_newVideoPath();
     void slot_videoFileSystemWatcherSetNewPath();
     void slot_logFolder();
+    void slot_refresh();
 
     // Snapshot
     void slot_snapshotHideBeforeRecording( bool bo );
@@ -107,7 +108,6 @@ private Q_SLOTS:
 
     void slot_videoCodecChanged( QString codec );
 
-    void slot_test();
 
 protected:
     void closeEvent( QCloseEvent *event );

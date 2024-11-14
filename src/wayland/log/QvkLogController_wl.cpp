@@ -91,7 +91,7 @@ QvkLogController_wl::~QvkLogController_wl()
 }
 
 
-QString QvkLogController_wl::get_logPath()
+QString QvkLogController_wl::get_log_filePath()
 {
     return logFile_wl.fileName();
 }

@@ -32,7 +32,7 @@ class QvkLogController_wl : public QObject
 public:
     QvkLogController_wl();
     virtual ~QvkLogController_wl();
-    QString get_logPath();
+    QString get_log_filePath();
 
 
 public slots:

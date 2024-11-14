@@ -79,7 +79,9 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
     connect( ui->toolButtonScreencast, &QToolButton::clicked, this, [=]() { ui->tabWidgetSideBar->setCurrentIndex(0); } );
     connect( ui->toolButtonCamera,     &QToolButton::clicked, this, [=]() { ui->tabWidgetSideBar->setCurrentIndex(1); } );
     connect( ui->toolButtonSnapshot,   &QToolButton::clicked, this, [=]() { ui->tabWidgetSideBar->setCurrentIndex(2); } );
-    connect( ui->toolButtonLog,        &QToolButton::clicked, this, [=]() { ui->tabWidgetSideBar->setCurrentIndex(3); } );
+    connect( ui->toolButtonLog,        &QToolButton::clicked, this, [=]() { ui->tabWidgetSideBar->setCurrentIndex(3);
+        ui->pushButton_log_refresh->click();
+    } );
     ui->tabWidgetSideBar->tabBar()->hide();
     ui->toolButtonScreencast->click();
 
@@ -153,13 +155,13 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
 
     vkSettings.readAll( ui, this );
 
-    connect( ui->pushButton, SIGNAL( clicked(bool) ), this, SLOT( slot_test() ) );
+    connect( ui->pushButton_log_refresh, SIGNAL( clicked(bool) ), this, SLOT( slot_refresh() ) );
  }
 
 
-void QvkMainWindow_wl::slot_test()
+void QvkMainWindow_wl::slot_refresh()
 {
-    QFile file( vkLogController->get_logPath() );
+    QFile file( vkLogController->get_log_filePath() );
     file.open( QIODevice::ReadOnly );
     QTextStream in( &file );
     ui->textBrowser->clear();
@@ -283,7 +285,7 @@ void QvkMainWindow_wl::get_system_info()
     qDebug().noquote() << global::nameOutput << "Qt-TranslationsPath:" << QLibraryInfo::path( QLibraryInfo::TranslationsPath );
     qDebug().noquote() << global::nameOutput << "Qt-LibraryPath:     " << QLibraryInfo::path( QLibraryInfo::LibrariesPath );
 //    qDebug().noquote() << global::nameOutput << "Settings:" << vkSettings.getFileName();
-    qDebug().noquote() << global::nameOutput << "Log:" << vkLogController->get_logPath();
+    qDebug().noquote() << global::nameOutput << "Log:" << vkLogController->get_log_filePath();
     qDebug().noquote() << global::nameOutput << "Default Videopath:" << QStandardPaths::writableLocation( QStandardPaths::MoviesLocation );
 //    qDebug().noquote() << global::nameOutput << "User Videopath:" << vkSettings.getVideoPath();
     qDebug().noquote();
@@ -1116,7 +1118,7 @@ void QvkMainWindow_wl::slot_videoFileSystemWatcherSetNewPath()
 
 void QvkMainWindow_wl::slot_logFolder()
 {
-    QUrl url( vkLogController->get_logPath() );
+    QUrl url( vkLogController->get_log_filePath() );
     QString path = url.adjusted( QUrl::RemoveFilename ).toString();
 
     if ( QDesktopServices::openUrl( QUrl( "file:///" + path, QUrl::TolerantMode ) ) == false ) {

@@ -1479,8 +1479,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>247</width>
-                     <height>429</height>
+                     <width>20</width>
+                     <height>98</height>
                     </rect>
                    </property>
                    <layout class="QGridLayout" name="gridLayoutAvailable">
@@ -2821,13 +2821,6 @@
                <widget class="QTextBrowser" name="textBrowser"/>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton">
-                <property name="text">
-                 <string>Read once more</string>
-                </property>
-               </widget>
-              </item>
-              <item>
                <layout class="QHBoxLayout" name="horizontalLayout_12">
                 <item>
                  <spacer name="horizontalSpacer_6">
@@ -2851,6 +2844,18 @@
                   </property>
                   <property name="text">
                    <string>Folder</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton_log_refresh">
+                  <property name="font">
+                   <font>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string notr="true">Refresh</string>
                   </property>
                  </widget>
                 </item>
