@@ -159,16 +159,6 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
  }
 
 
-void QvkMainWindow_wl::slot_log_refresh()
-{
-    QFile file( vkLogController->get_log_filePath() );
-    file.open( QIODevice::ReadOnly );
-    QTextStream in( &file );
-    ui->textBrowser->clear();
-    ui->textBrowser->setText( in.readAll() );
-}
-
-
 QvkMainWindow_wl::~QvkMainWindow_wl()
 {
 }
@@ -193,6 +183,17 @@ void QvkMainWindow_wl::closeEvent( QCloseEvent *event )
     vkSettings.saveAll( ui, this );
 
     qDebug().noquote() << global::nameOutput << "QvkMainWindow_wl::closeEvent End close";
+}
+
+
+void QvkMainWindow_wl::slot_log_refresh()
+{
+    QFile file( vkLogController->get_log_filePath() );
+    file.open( QIODevice::ReadOnly );
+    QTextStream in( &file );
+    ui->textBrowser->clear();
+    ui->textBrowser->setText( in.readAll() );
+    ui->textBrowser->moveCursor( QTextCursor::End ) ;
 }
 
 
