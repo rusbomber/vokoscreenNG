@@ -155,11 +155,11 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
 
     vkSettings.readAll( ui, this );
 
-    connect( ui->pushButton_log_refresh, SIGNAL( clicked(bool) ), this, SLOT( slot_refresh() ) );
+    connect( ui->pushButton_log_refresh, SIGNAL( clicked(bool) ), this, SLOT( slot_log_refresh() ) );
  }
 
 
-void QvkMainWindow_wl::slot_refresh()
+void QvkMainWindow_wl::slot_log_refresh()
 {
     QFile file( vkLogController->get_log_filePath() );
     file.open( QIODevice::ReadOnly );
@@ -368,7 +368,7 @@ void QvkMainWindow_wl::set_Connects()
 
     connect( ui->pushButtonSnapshot, SIGNAL( clicked(bool) ), this, SLOT( slot_snapshotHideBeforeRecording(bool) ) );
 
-    connect( ui->pushButton_log_openfolder, SIGNAL( clicked(bool) ), this, SLOT( slot_logFolder() ) );
+    connect( ui->pushButton_log_openfolder, SIGNAL( clicked(bool) ), this, SLOT( slot_log_folder() ) );
 
     connect( ui->comboBoxVideoCodec, SIGNAL( currentTextChanged(QString) ), this, SLOT( slot_videoCodecChanged(QString) ) );
 }
@@ -1116,7 +1116,7 @@ void QvkMainWindow_wl::slot_videoFileSystemWatcherSetNewPath()
 }
 
 
-void QvkMainWindow_wl::slot_logFolder()
+void QvkMainWindow_wl::slot_log_folder()
 {
     QUrl url( vkLogController->get_log_filePath() );
     QString path = url.adjusted( QUrl::RemoveFilename ).toString();

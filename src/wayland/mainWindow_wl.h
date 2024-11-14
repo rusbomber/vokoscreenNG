@@ -96,8 +96,8 @@ private Q_SLOTS:
     void slot_vp8Reset();
     void slot_newVideoPath();
     void slot_videoFileSystemWatcherSetNewPath();
-    void slot_logFolder();
-    void slot_refresh();
+    void slot_log_folder();
+    void slot_log_refresh();
 
     // Snapshot
     void slot_snapshotHideBeforeRecording( bool bo );
