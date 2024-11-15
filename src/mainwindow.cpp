@@ -2405,41 +2405,17 @@ QString QvkMainWindow::get_height_From_Screen()
     return value;
 }
 
-
+// Only for X11
 void QvkMainWindow::slot_screenCountChanged( QString stringText, QString stringData )
 {
     ui->comboBoxScreencastScreen->addItem( stringText, stringData );
     qDebug().noquote() << global::nameOutput << "ItemText in Combobox:" << stringText;
     qDebug().noquote() << global::nameOutput << "ItemData in Combobox:" << stringData;
     qDebug();
-
-#ifdef Q_OS_WIN
-    QStringList list;
-    for ( int i=0; i < ui->comboBoxScreencastScreen->count(); i++ ) {
-        list.append( ui->comboBoxScreencastScreen->itemText( i ) );
-    }
-    list.sort();
-    ui->comboBoxScreencastScreen->clear();
-    ui->comboBoxScreencastScreen->addItems( list );
-#endif
 }
 
-
+// Only for X11
 void QvkMainWindow::slot_screenCountChangedArea( QString stringText, QString stringData )
 {
     ui->comboBoxScreencastScreenArea->addItem( stringText, stringData );
-
-#ifdef Q_OS_WIN
-    // Unter Windows muß zur Aufnahme mit GStreamer das Display in sortierter Reihenfolge bereitgestellt werden. Display1, Display2, Display3 etc.
-    QStringList list;
-    for ( int i=0; i < ui->comboBoxScreencastScreenArea->count(); i++ ) {
-        list.append( ui->comboBoxScreencastScreenArea->itemText( i ) + "|" + ui->comboBoxScreencastScreenArea->itemData( i ).toString() );
-    }
-    list.sort();
-    ui->comboBoxScreencastScreenArea->clear();
-
-    for ( int i=0; i < list.count(); i++ ) {
-        ui->comboBoxScreencastScreenArea->addItem( list.at(i).section( "|", 0, 0 ), list.at(i).section( "|", 1, 1 ) );
-    }
-#endif
 }
