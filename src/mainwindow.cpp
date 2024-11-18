@@ -670,25 +670,6 @@ QvkMainWindow::QvkMainWindow(QWidget *parent) : QMainWindow(parent),
     vkGlobalShortcut->slot_checkbox_shortcut_halo_clicked( true );
     vkGlobalShortcut->slot_checkbox_shortcut_snapshot_clicked( true );
 
-    // After reading the settings, we read the arguments and run
-    QStringList arguments = QApplication::instance()->arguments();
-    if ( arguments.contains( "gst_appsrc" ) == true ) {
-        gst_appsrc = true;
-        ui->pushButtonStart->setVisible( false );
-        ui->pushButtonStop->setVisible( false );
-        ui->horizontalLayout->insertWidget( 0, ui->pushButtonStopAppsrc );
-        ui->horizontalLayout->insertWidget( 0, ui->pushButtonStartAppsrc );
-    } else {
-        ui->pushButtonStartAppsrc->setVisible( false );
-        ui->pushButtonStopAppsrc->setVisible( false );
-        if ( arguments.count() > 1  ) {
-            qDebug().noquote() << global::nameOutput << "started from file:" << arguments.at(1);
-            vkPlayerController->setMediaFile( arguments.at(1) );
-            vkPlayerController->slot_pushButtonPlay();
-            ui->tabWidgetSideBar->setCurrentIndex( ui->tabWidgetSideBar->indexOf( ui->tabSidebarPlayer ) );
-        }
-    }
-
     new QvkImageFromTabs( this );
 
     is_videoFolderExists_and_haveWritePermission();

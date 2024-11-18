@@ -291,33 +291,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButtonStartAppsrc">
-         <property name="font">
-          <font>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="toolTip">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string notr="true">Start-App</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButtonStopAppsrc">
-         <property name="font">
-          <font>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string notr="true">Stop-App</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <spacer name="verticalSpacer_16">
          <property name="orientation">
           <enum>Qt::Vertical</enum>

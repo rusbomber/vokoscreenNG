@@ -48,26 +48,9 @@ int main(int argc, char *argv[])
     QApplication::setStyle( QStyleFactory::create( "Fusion" ) );
     QApplication app(argc, argv);
 
-    // This is for X11 and Windows. Wayland has a own logger.
-    global::textBrowserLog = new QTextBrowser;
-    QvkLogController *vklogController = new QvkLogController;
-
     QString help;
-    help.append( "\n" );
-    help.append( "Usage: " + global::name + " [Option] [File or URL]" + "\n" );
-    help.append( "\n" );
-    help.append( "Options: \n" );
     help.append( "  -h or --help        Print this message\n" );
     help.append( "  -v or --version     Print version \n" );
-    help.append( "\n" );
-    help.append( "File or Url:\n" );
-    help.append( "  Play a video\n" );
-    help.append( "    Example file:\n" );
-    help.append( "      vokoscreenNG /path/video\n" );
-    help.append( "\n" );
-    help.append( "    Example URL:\n");
-    help.append( "      vokoscreenNG http://www.rapconverter.com/SampleDownload/Sample320.mp4\n");
-    help.append( "      vokoscreenNG http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4" );
     help.append( "\n" );
 
     QStringList arguments = QApplication::instance()->arguments();
@@ -78,36 +61,19 @@ int main(int argc, char *argv[])
              ( arguments.at(1) == "-h"     ) )
         {
             qDebug().resetFormat().noquote() << help;
-            delete vklogController;
             return 0;
         }
 
         if ( ( arguments.at(1) == "--version" ) or ( arguments.at(1) == "-v" ) )
         {
             qDebug().noquote() << global::name << global::version;
-            delete vklogController;
             return 0;
         }
-
-        if ( arguments.at(1) == "gst_appsrc" ) {
-            goto end;
-        }
-
-        // If call from terminal and local file or remote file not exists
-        QFile file( arguments.at(1) );
-        if ( ( file.exists() == false ) and
-             ( arguments.at(1).contains( "http://" ) == false ) and
-             ( arguments.at(1).contains( "https://" ) == false ) )
-        {
-            qDebug().noquote() << global::nameOutput << arguments.at(1) << "file not exists";
-            qDebug().resetFormat().noquote() << help;
-            qDebug();
-            delete vklogController;
-            return 1;
-        }
-
     }
-    end:
+
+    // This is for X11 and Windows. Wayland has a own logger.
+    global::textBrowserLog = new QTextBrowser;
+    new QvkLogController;
 
     // Initialize GStreamer
     // https://developer.gnome.org/gstreamer/stable/gst-running.html
