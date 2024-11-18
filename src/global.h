@@ -21,7 +21,6 @@
  */
 
 #include <QString>
-#include <QTextBrowser>
 #include <QLineEdit>
 
 namespace global
