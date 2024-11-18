@@ -80,8 +80,6 @@ int main(int argc, char *argv[])
     global::textBrowserLog = new QTextBrowser;
     new QvkLogController;
 
-    // Initialize GStreamer
-    // https://developer.gnome.org/gstreamer/stable/gst-running.html
 #ifdef Q_OS_UNIX
     QString separator;
     separator = ":";
