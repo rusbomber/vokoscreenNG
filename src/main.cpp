@@ -52,15 +52,15 @@ int main(int argc, char *argv[])
     help.append( "  -h or --help        Print this message\n" );
     help.append( "  -v or --version     Print version \n" );
     help.append( "\n" );
-
     QStringList arguments = QApplication::instance()->arguments();
     if ( !arguments.empty() and ( arguments.count() == 2 ) )
     {
         QStringList arguments = QApplication::instance()->arguments();
+        help:
         if ( ( arguments.at(1) == "--help" ) or
              ( arguments.at(1) == "-h"     ) )
         {
-            qDebug().resetFormat().noquote() << help;
+            qDebug().noquote() << help;
             return 0;
         }
 
@@ -68,6 +68,11 @@ int main(int argc, char *argv[])
         {
             qDebug().noquote() << global::name << global::version;
             return 0;
+        } {
+            arguments.clear();
+            arguments.append( " ");
+            arguments.append( "--help" );
+            goto help;
         }
     }
 
