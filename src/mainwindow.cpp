@@ -1738,7 +1738,6 @@ void QvkMainWindow::VK_gst_Elements_available()
     list << "pulsesrc";
 #endif
     list << "queue";
-    list << "appsrc";
     list << "capsfilter";
     list << "videoconvert";
     list << "videorate";

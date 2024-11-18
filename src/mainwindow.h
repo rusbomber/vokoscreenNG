@@ -164,8 +164,6 @@ private:
 
     bool openh264ProfileTest;
 
-    bool gst_appsrc = false;
-
     QTranslator translator;
     QTranslator qtTranslator;
 
