@@ -76,8 +76,6 @@ int main(int argc, char *argv[])
         }
     }
 
-    // This is for X11 and Windows. Wayland has a own logger.
-    global::textBrowserLog = new QTextBrowser;
     new QvkLogController;
 
 #ifdef Q_OS_UNIX

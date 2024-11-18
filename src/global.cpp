@@ -31,7 +31,6 @@ namespace global
     QString name = "vokoscreenNG";
     QString nameOutput = "[" + name + "]";
     int showclickCounter = 0;
-    QTextBrowser *textBrowserLog;
     QLineEdit *lineEditWASAPIWatcher;
     QList<QLineEdit*> *listChildren;
 }

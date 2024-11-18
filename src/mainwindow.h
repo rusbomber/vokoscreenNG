@@ -85,7 +85,7 @@ public:
     QvkSpezialSlider *sliderFrames;
     QvkMagnifierController *vkMagnifierController;
     QvkGlobalShortcut *vkGlobalShortcut;
-    QvkLogController *vklogController;
+    QvkLogController *vkLogController;
     QvkLicenses *vkLicenses;
     QvkHelp *vkHelp;
     QvkCameraController *vkCameraController;
@@ -231,11 +231,12 @@ private slots:
 
     void slot_darkMode( bool bo );
 
-
     void slot_profileSave(bool bo);
     void slot_profileLoad(int index);
     void slot_profileNew(bool bo);
     void slot_profileDelete(bool bo);
+
+    void slot_log_refresh();
 
 
 signals:

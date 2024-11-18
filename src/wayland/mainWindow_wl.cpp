@@ -61,8 +61,6 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
 
     ui->setupUi( this );
 
-    vkLogController = new QvkLogController_wl;
-
     supportedImageFormats();
 
     // Inhalt von tab Video in Tab 1 verschieben und Tab Video ausblenden

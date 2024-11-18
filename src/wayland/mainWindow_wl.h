@@ -9,7 +9,7 @@
 #include "QvkCountdown_wl.h"
 
 #include "QvkSpezialSlider.h"
-#include "QvkLogController_wl.h"
+#include "QvkLogController.h"
 
 #include <QMainWindow>
 #include <QTranslator>
@@ -47,7 +47,7 @@ private:
     QTranslator translator;
     QTranslator qtTranslator;
     QvkRegionChoise_wl *vkRegionChoise_wl;
-    QvkLogController_wl *vkLogController;
+    QvkLogController *vkLogController;
     GstElement *pipeline = nullptr;
     QStringList videoFormatsList;
     QFileSystemWatcher *videoFileSystemWatcher;

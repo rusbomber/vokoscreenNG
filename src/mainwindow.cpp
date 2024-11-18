@@ -76,8 +76,6 @@ QvkMainWindow::QvkMainWindow(QWidget *parent) : QMainWindow(parent),
 
     ui->setupUi(this);
 
-    ui->verticalLayout_26->insertWidget( 0, global::textBrowserLog );
-
     // Inhalt von tab Video in Tab 1 verschieben und Tab Video ausblenden
     ui->verticalLayout_7->insertWidget( 4, ui->widget );
     ui->tabWidgetScreencast->removeTab(1);
@@ -299,7 +297,7 @@ QvkMainWindow::QvkMainWindow(QWidget *parent) : QMainWindow(parent),
     qDebug().noquote() << global::nameOutput << "Qt-TranslationsPath:" << QLibraryInfo::path( QLibraryInfo::TranslationsPath );
     qDebug().noquote() << global::nameOutput << "Qt-LibraryPath:     " << QLibraryInfo::path( QLibraryInfo::LibrariesPath );
     qDebug().noquote() << global::nameOutput << "Settings:" << vkSettings.getFileName();
-    qDebug().noquote() << global::nameOutput << "Log:" << vklogController->get_logPath();
+    qDebug().noquote() << global::nameOutput << "Log:" << vkLogController->get_log_filePath();
     qDebug().noquote() << global::nameOutput << "Default Videopath:" << QStandardPaths::writableLocation( QStandardPaths::MoviesLocation );
     qDebug().noquote() << global::nameOutput << "User Videopath:" << vkSettings.getVideoPath();
     qDebug();
@@ -324,7 +322,9 @@ QvkMainWindow::QvkMainWindow(QWidget *parent) : QMainWindow(parent),
     connect( ui->toolButtonSnapshot,   &QToolButton::clicked, this, [=]() { ui->tabWidgetSideBar->setCurrentIndex(3); } );
     connect( ui->toolButtonShortcut,   &QToolButton::clicked, this, [=]() { ui->tabWidgetSideBar->setCurrentIndex(4); } );
     connect( ui->toolButtonPlayer,     &QToolButton::clicked, this, [=]() { ui->tabWidgetSideBar->setCurrentIndex(5); } );
-    connect( ui->toolButtonLog,        &QToolButton::clicked, this, [=]() { ui->tabWidgetSideBar->setCurrentIndex(6); } );
+    connect( ui->toolButtonLog,        &QToolButton::clicked, this, [=]() { ui->tabWidgetSideBar->setCurrentIndex(6);
+        ui->pushButton_log_refresh->click();
+    } );
     ui->tabWidgetSideBar->tabBar()->hide();
     ui->toolButtonScreencast->click();
 
@@ -725,12 +725,26 @@ QvkMainWindow::QvkMainWindow(QWidget *parent) : QMainWindow(parent),
         comboBox->setCurrentIndex( index );
     }
     // End Profiles
+
+    connect( ui->pushButton_log_refresh, SIGNAL( clicked(bool) ), this, SLOT( slot_log_refresh() ) );
+
 }
 
 
 QvkMainWindow::~QvkMainWindow()
 {
     delete ui;
+}
+
+
+void QvkMainWindow::slot_log_refresh()
+{
+    QFile file( vkLogController->get_log_filePath() );
+    file.open( QIODevice::ReadOnly );
+    QTextStream in( &file );
+    ui->textBrowser->clear();
+    ui->textBrowser->setText( in.readAll() );
+    ui->textBrowser->moveCursor( QTextCursor::End ) ;
 }
 
 
@@ -2345,7 +2359,7 @@ void QvkMainWindow::slot_Folder()
 
 void QvkMainWindow::slot_logFolder()
 {
-    QUrl url( vklogController->get_logPath() );
+    QUrl url( vkLogController->get_log_filePath() );
     QString path = url.adjusted( QUrl::RemoveFilename ).toString();
 
     if ( QDesktopServices::openUrl( QUrl( "file:///" + path, QUrl::TolerantMode ) ) == false ) {

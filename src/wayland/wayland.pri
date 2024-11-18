@@ -34,6 +34,3 @@ include(camera/camera_wl.pri)
 
 # Audio
 include(audio/audio_wl.pri)
-
-# Log
-include(log/log_wl.pri)

@@ -74,9 +74,6 @@ void myMessageHandler( QtMsgType type, const QMessageLogContext &context, const 
     QTextStream stream( &logFile );
     stream << sMsg << eol;
     logFile.close();
-
-    // Output GUI
-    global::textBrowserLog->append( sMsg );
 }
 
 
@@ -100,7 +97,7 @@ QvkLogController::~QvkLogController()
 }
 
 
-QString QvkLogController::get_logPath()
+QString QvkLogController::get_log_filePath()
 {
     return logFile.fileName();
 }
