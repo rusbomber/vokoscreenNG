@@ -907,7 +907,7 @@
             </widget>
             <widget class="QWidget" name="tab_4">
              <attribute name="title">
-              <string>Seite</string>
+              <string notr="true">Seite</string>
              </attribute>
              <layout class="QVBoxLayout" name="verticalLayout_3">
               <item>
