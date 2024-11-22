@@ -90,6 +90,7 @@
 <file>pictures/screencast/format-codec.png</file>
 <file>pictures/screencast/microphone.png</file>
 <file>pictures/screencast/timer.png</file>
+<file>pictures/screencast/convert.png</file>
 <file>pictures/screencast/strip.png</file>
 <file>pictures/screencast/information.png</file>
 <file>pictures/screencast/world.png</file>
@@ -182,6 +183,7 @@
 <file>pictures/screencast/help-about.license</file>
 <file>pictures/screencast/preferences-system.license</file>
 <file>pictures/screencast/strip-avi.license</file>
+<file>pictures/screencast/convert.license</file>
 <file>pictures/showClick/halo.license</file>
 <file>pictures/showClick/vokoShowClick.license</file>
 <file>pictures/showClick/cursor.license</file>

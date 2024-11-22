@@ -3,7 +3,8 @@
     <name>QvkAudioController</name>
     <message>
         <source>Select one or more devices</source>
-        <translation>Select one or more devices</translation>
+        <translation>Select one or more devices 
+</translation>
     </message>
 </context>
 <context>

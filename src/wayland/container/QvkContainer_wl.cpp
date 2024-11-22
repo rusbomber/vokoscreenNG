@@ -92,6 +92,14 @@ QvkContainer_wl::QvkContainer_wl(QObject *parent) : QObject(parent)
     MKV->add_AudioCodec( "opusenc", "opus" );
     MKV->add_AudioCodec( "lamemp3enc", "mp3" );
 
+    Container_wl *MP4 = new Container_wl( "mp4mux", "mp4" );
+    MP4->add_VideoCodec( "openh264enc", "H.264" );
+    MP4->add_AudioCodec( "lamemp3enc", "mp3" );
+    MP4->add_AudioCodec( "opusenc", "opus" );
+
+    Container_wl *GIF = new Container_wl( "gifenc", "gif" );
+    GIF->add_VideoCodec( "gifenc", "gif" );
+/*
     Container_wl *WEBM = new Container_wl( "webmmux", "webm" );
     WEBM->add_VideoCodec( "vp8enc", "VP8" );
     WEBM->add_AudioCodec( "vorbisenc", "vorbis" );
@@ -102,26 +110,19 @@ QvkContainer_wl::QvkContainer_wl(QObject *parent) : QObject(parent)
     AVI->add_VideoCodec( "vp8enc", "VP8" );
     AVI->add_AudioCodec( "lamemp3enc", "mp3" );
 
-    Container_wl *MP4 = new Container_wl( "mp4mux", "mp4" );
-    MP4->add_VideoCodec( "openh264enc", "H.264" );
-    MP4->add_AudioCodec( "lamemp3enc", "mp3" );
-    MP4->add_AudioCodec( "opusenc", "opus" );
-
     Container_wl *MOV = new Container_wl( "qtmux", "mov" );
     MOV->add_VideoCodec( "openh264enc", "H.264" );
     MOV->add_VideoCodec( "vp8enc", "VP8" );
     MOV->add_AudioCodec( "lamemp3enc", "mp3" );
-
-    Container_wl *GIF = new Container_wl( "gifenc", "gif" );
-    GIF->add_VideoCodec( "gifenc", "gif" );
+*/
 
     Containers = new QList<Container_wl*>;
     Containers->append( MKV );
     Containers->append( GIF );
     Containers->append( MP4 );
-    Containers->append( WEBM );
-    Containers->append( AVI );
-    Containers->append( MOV );
+//    Containers->append( WEBM );
+//    Containers->append( AVI );
+//    Containers->append( MOV );
 }
 
 /*!

@@ -687,18 +687,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Pause</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Continue</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Folder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -752,6 +740,22 @@
     </message>
     <message>
         <source>Second wait before recording</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide this window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seconds wait before recording</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
