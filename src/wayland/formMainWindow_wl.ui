@@ -146,6 +146,38 @@
          </widget>
         </item>
         <item>
+         <widget class="QToolButton" name="toolButtonConvert">
+          <property name="minimumSize">
+           <size>
+            <width>110</width>
+            <height>56</height>
+           </size>
+          </property>
+          <property name="text">
+           <string notr="true"/>
+          </property>
+          <property name="icon">
+           <iconset resource="../screencast.qrc">
+            <normaloff>:/pictures/screencast/convert.png</normaloff>:/pictures/screencast/convert.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>48</width>
+            <height>48</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="autoExclusive">
+           <bool>true</bool>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QToolButton" name="toolButtonLog">
           <property name="minimumSize">
            <size>
@@ -201,7 +233,7 @@
          <enum>QTabWidget::West</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="tab_sidebar_screeancast">
          <attribute name="title">
@@ -557,8 +589,8 @@
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>409</width>
-                          <height>122</height>
+                          <width>16</width>
+                          <height>16</height>
                          </rect>
                         </property>
                         <property name="accessibleName">
@@ -1479,8 +1511,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>449</width>
-                     <height>429</height>
+                     <width>20</width>
+                     <height>98</height>
                     </rect>
                    </property>
                    <layout class="QGridLayout" name="gridLayoutAvailable">
@@ -2778,6 +2810,47 @@
                </layout>
               </item>
              </layout>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab_3">
+         <attribute name="title">
+          <string notr="true"/>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_21">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QTabWidget" name="tabWidgetConvert">
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>48</width>
+              <height>48</height>
+             </size>
+            </property>
+            <widget class="QWidget" name="tab_5">
+             <attribute name="icon">
+              <iconset resource="../screencast.qrc">
+               <normaloff>:/pictures/screencast/convert.png</normaloff>:/pictures/screencast/convert.png</iconset>
+             </attribute>
+             <attribute name="title">
+              <string notr="true"/>
+             </attribute>
             </widget>
            </widget>
           </item>
