@@ -192,6 +192,8 @@ void QvkMainWindow_wl::slot_openFileConvert(bool)
 
     QString pathFile;
     QvkFileDialog vkFileDialog( this );
+    QStringList list( { "video/x-matroska" } );
+    vkFileDialog.setMimeTypeFilters( list );
     vkFileDialog.setVideoPath( QStandardPaths::writableLocation( QStandardPaths::MoviesLocation ) );
     if ( vkFileDialog.exec() == QDialog::Accepted ) {
         if ( !vkFileDialog.selectedFiles().empty() ) {
