@@ -8,6 +8,7 @@
 #include "global.h"
 #include "QvkLicenses.h"
 #include "qvkdirdialog.h"
+#include "QvkFileDialog.h"
 
 #include <QStringList>
 #include <QStandardPaths>
@@ -182,6 +183,24 @@ void QvkMainWindow_wl::closeEvent( QCloseEvent *event )
     vkSettings.saveAll( ui, this );
 
     qDebug().noquote() << global::nameOutput << "QvkMainWindow_wl::closeEvent End close";
+}
+
+
+void QvkMainWindow_wl::slot_openFileConvert(bool)
+{
+    QApplication::setDesktopSettingsAware( false );
+
+    QString pathFile;
+    QvkFileDialog vkFileDialog( this );
+    vkFileDialog.setVideoPath( QStandardPaths::writableLocation( QStandardPaths::MoviesLocation ) );
+    if ( vkFileDialog.exec() == QDialog::Accepted ) {
+        if ( !vkFileDialog.selectedFiles().empty() ) {
+            pathFile = vkFileDialog.selectedFiles().at(0);
+            ui->lineEditConvert->setText( pathFile );
+        }
+    }
+
+    QApplication::setDesktopSettingsAware( true );
 }
 
 
@@ -372,6 +391,8 @@ void QvkMainWindow_wl::set_Connects()
     connect( ui->pushButton_log_openfolder, SIGNAL( clicked(bool) ), this, SLOT( slot_log_folder() ) );
 
     connect( ui->comboBoxVideoCodec, SIGNAL( currentTextChanged(QString) ), this, SLOT( slot_videoCodecChanged(QString) ) );
+
+    connect( ui->toolButton_convert_mkv, SIGNAL( clicked(bool) ), this, SLOT( slot_openFileConvert(bool) ) );
 }
 
 

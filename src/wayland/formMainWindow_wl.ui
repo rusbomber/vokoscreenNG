@@ -1514,8 +1514,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>449</width>
-                     <height>429</height>
+                     <width>20</width>
+                     <height>98</height>
                     </rect>
                    </property>
                    <layout class="QGridLayout" name="gridLayoutAvailable">
@@ -2911,12 +2911,22 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout">
                 <item>
-                 <widget class="QLineEdit" name="lineEdit"/>
+                 <widget class="QLineEdit" name="lineEditConvert"/>
                 </item>
                 <item>
-                 <widget class="QToolButton" name="toolButton">
+                 <widget class="QToolButton" name="toolButton_convert_mkv">
                   <property name="text">
                    <string>...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton_convert_mp4">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="text">
+                   <string>MP4</string>
                   </property>
                  </widget>
                 </item>
@@ -2952,13 +2962,6 @@
                    </size>
                   </property>
                  </spacer>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="pushButton_3">
-                  <property name="text">
-                   <string>Convert</string>
-                  </property>
-                 </widget>
                 </item>
                 <item>
                  <spacer name="horizontalSpacer_12">
@@ -3118,7 +3121,7 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_2"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>
