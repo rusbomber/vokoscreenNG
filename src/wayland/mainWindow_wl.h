@@ -107,7 +107,6 @@ private Q_SLOTS:
     // Snapshot
 
     void slot_videoCodecChanged( QString codec );
-    void slot_openFileConvert(bool);
 
 
 protected:

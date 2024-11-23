@@ -32,7 +32,7 @@ class QvkConvert_wl: public QWidget
 {
     Q_OBJECT
 public:
-    QvkConvert_wl( QvkMainWindow_wl *vkMainWindow, Ui_formMainWindow_wl *ui_mainwindow );
+    QvkConvert_wl(QvkMainWindow_wl *vkMainWindow, Ui_formMainWindow_wl *vk_ui );
     virtual ~QvkConvert_wl();
     QvkMainWindow_wl *mainWindow;
 
@@ -41,6 +41,7 @@ public slots:
 
 
 private slots:
+    void slot_openFileConvert(bool);
 
 
 signals:

@@ -4,6 +4,7 @@
 #include "QvkShowMessage_wl.h"
 #include "QvkCameraController_wl.h"
 #include "QvkAudioController_wl.h"
+#include "QvkConvert_wl.h"
 
 #include "global.h"
 #include "QvkLicenses.h"
@@ -130,6 +131,7 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
     ui->label_Upate_tab_2->hide();
 
     new QvkCameraController_wl( ui ); //------------------------------------------------------------------------
+    new QvkConvert_wl( this, ui );
 
     QList<QScreen *> screen = QGuiApplication::screens();
     if ( !screen.empty() ) {
@@ -183,26 +185,6 @@ void QvkMainWindow_wl::closeEvent( QCloseEvent *event )
     vkSettings.saveAll( ui, this );
 
     qDebug().noquote() << global::nameOutput << "QvkMainWindow_wl::closeEvent End close";
-}
-
-
-void QvkMainWindow_wl::slot_openFileConvert(bool)
-{
-    QApplication::setDesktopSettingsAware( false );
-
-    QString pathFile;
-    QvkFileDialog vkFileDialog( this );
-    QStringList list( { "video/x-matroska" } );
-    vkFileDialog.setMimeTypeFilters( list );
-    vkFileDialog.setVideoPath( QStandardPaths::writableLocation( QStandardPaths::MoviesLocation ) );
-    if ( vkFileDialog.exec() == QDialog::Accepted ) {
-        if ( !vkFileDialog.selectedFiles().empty() ) {
-            pathFile = vkFileDialog.selectedFiles().at(0);
-            ui->lineEditConvert->setText( pathFile );
-        }
-    }
-
-    QApplication::setDesktopSettingsAware( true );
 }
 
 
@@ -394,7 +376,6 @@ void QvkMainWindow_wl::set_Connects()
 
     connect( ui->comboBoxVideoCodec, SIGNAL( currentTextChanged(QString) ), this, SLOT( slot_videoCodecChanged(QString) ) );
 
-    connect( ui->toolButton_convert_mkv, SIGNAL( clicked(bool) ), this, SLOT( slot_openFileConvert(bool) ) );
 }
 
 
