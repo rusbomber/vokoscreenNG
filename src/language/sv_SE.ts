@@ -741,10 +741,6 @@
         <translation>Vänta x sekunder före inspelningsstart</translation>
     </message>
     <message>
-        <source>Seite</source>
-        <translation>Sida</translation>
-    </message>
-    <message>
         <source>Reset</source>
         <translation>Återställ</translation>
     </message>
