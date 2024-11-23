@@ -46,8 +46,7 @@ void QvkConvert_wl::slot_openFileConvert(bool)
     QvkFileDialog vkFileDialog( this );
     QStringList list( { "video/x-matroska" } );
     vkFileDialog.setMimeTypeFilters( list );
-    // https://blog.david-redondo.de/kde/wayland/qt/2024/04/04/xdg-dialog.html
-    vkFileDialog.setModal( true ); // Funktioniert ab Qt 6.8
+    vkFileDialog.setModal( true );
     vkFileDialog.setVideoPath( QStandardPaths::writableLocation( QStandardPaths::MoviesLocation ) );
     if ( vkFileDialog.exec() == QDialog::Accepted ) {
         if ( !vkFileDialog.selectedFiles().empty() ) {
