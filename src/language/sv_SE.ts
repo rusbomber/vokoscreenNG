@@ -685,18 +685,6 @@
         <translation>Stoppa</translation>
     </message>
     <message>
-        <source>Pause</source>
-        <translation>Pausa</translation>
-    </message>
-    <message>
-        <source>Continue</source>
-        <translation>Fortsätt</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Spela upp</translation>
-    </message>
-    <message>
         <source>Folder</source>
         <translation>Mapp</translation>
     </message>
@@ -751,6 +739,22 @@
     <message>
         <source>Second wait before recording</source>
         <translation>Vänta x sekunder före inspelningsstart</translation>
+    </message>
+    <message>
+        <source>Seite</source>
+        <translation>Sida</translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation>Återställ</translation>
+    </message>
+    <message>
+        <source>Hide this window</source>
+        <translation>Dölj det här fönstret</translation>
+    </message>
+    <message>
+        <source>Seconds wait before recording</source>
+        <translation>Sekunders väntetid före inspelning</translation>
     </message>
 </context>
 <context>

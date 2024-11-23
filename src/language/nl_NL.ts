@@ -685,18 +685,6 @@
         <translation>Stoppen</translation>
     </message>
     <message>
-        <source>Pause</source>
-        <translation>Onderbreken</translation>
-    </message>
-    <message>
-        <source>Continue</source>
-        <translation>Hervatten</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Afspelen</translation>
-    </message>
-    <message>
         <source>Folder</source>
         <translation>Map</translation>
     </message>
@@ -750,6 +738,22 @@
     </message>
     <message>
         <source>Second wait before recording</source>
+        <translation>Aantal seconden voordat opname start</translation>
+    </message>
+    <message>
+        <source>Seite</source>
+        <translation>Gebied</translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation>Standaardwaarden</translation>
+    </message>
+    <message>
+        <source>Hide this window</source>
+        <translation>Venster verbergen</translation>
+    </message>
+    <message>
+        <source>Seconds wait before recording</source>
         <translation>Aantal seconden voordat opname start</translation>
     </message>
 </context>
