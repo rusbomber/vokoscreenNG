@@ -36,6 +36,9 @@ public:
     virtual ~QvkConvert_wl();
     QvkMainWindow_wl *mainWindow;
 
+private:
+    static GstBusSyncReply call_bus_message_convert( GstBus *bus, GstMessage *message, gpointer user_data );
+
 
 public slots:
 

@@ -62,6 +62,45 @@ void QvkConvert_wl::slot_convert_openfiledialog_mkv_to_mp4(bool)
 }
 
 
+GstBusSyncReply QvkConvert_wl::call_bus_message_convert( GstBus *bus, GstMessage *message, gpointer user_data )
+{
+    Q_UNUSED(bus);
+    Q_UNUSED(user_data)
+    switch (GST_MESSAGE_TYPE (message)) {
+        case GST_MESSAGE_ERROR:
+            qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_ERROR";
+            break;
+        case GST_MESSAGE_EOS:
+            qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_EOS";
+            break;
+        case GST_MESSAGE_DURATION_CHANGED:
+            qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_DURATION_CHANGED";
+            break;
+        case GST_MESSAGE_STEP_DONE:
+            qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_STEP_DONE";
+            break;
+        case GST_MESSAGE_TAG:
+            qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_TAG";
+            break;
+        case GST_MESSAGE_STATE_CHANGED:
+            // qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_STATE_CHANGED";
+            break;
+        case GST_MESSAGE_STREAM_START:
+            qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_STREAM_START";
+            break;
+        case GST_MESSAGE_APPLICATION:
+            {
+            qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_APPLICATION";
+            break;
+            }
+        default:
+            break;
+    }
+
+    return GST_BUS_PASS;
+}
+
+
 void QvkConvert_wl::slot_convert_mkv_to_mp4(bool)
 {
     GstElement *pipeline = nullptr;
@@ -83,22 +122,19 @@ void QvkConvert_wl::slot_convert_mkv_to_mp4(bool)
     pipeline = gst_parse_launch( line, &error );
 
     static GstBus *bus = gst_pipeline_get_bus( GST_PIPELINE ( pipeline ) );
-//    gst_bus_set_sync_handler( bus, (GstBusSyncHandler)call_bus_message, this, NULL );
-    //    gst_object_unref( bus );
+//    gst_bus_set_sync_handler( bus, (GstBusSyncHandler)call_bus_message_convert, this, NULL );
+    //gst_object_unref( bus );
 
     // Start playing
     GstStateChangeReturn ret = gst_element_set_state( pipeline, GST_STATE_PLAYING );
-    if ( ret == GST_STATE_CHANGE_FAILURE )   { qDebug().noquote() << global::nameOutput << "MP4 was clicked" << "GST_STATE_CHANGE_FAILURE" << "Returncode =" << ret;   } // 0
-    if ( ret == GST_STATE_CHANGE_SUCCESS )   { qDebug().noquote() << global::nameOutput << "MP4 was clicked" << "GST_STATE_CHANGE_SUCCESS" << "Returncode =" << ret;   } // 1
-    if ( ret == GST_STATE_CHANGE_ASYNC )     { qDebug().noquote() << global::nameOutput << "MP4 was clicked" << "GST_STATE_CHANGE_ASYNC"   << "Returncode =" << ret;   } // 2
-    if ( ret == GST_STATE_CHANGE_NO_PREROLL ){ qDebug().noquote() << global::nameOutput << "MP4 was clicked" << "GST_STATE_CHANGE_NO_PREROLL" << "Returncode =" << ret; }// 3
+    if ( ret == GST_STATE_CHANGE_FAILURE )   { qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_FAILURE" << "Returncode =" << ret;   } // 0
+    if ( ret == GST_STATE_CHANGE_SUCCESS )   { qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_SUCCESS" << "Returncode =" << ret;   } // 1
+    if ( ret == GST_STATE_CHANGE_ASYNC )     { qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_ASYNC"   << "Returncode =" << ret;   } // 2
+    if ( ret == GST_STATE_CHANGE_NO_PREROLL ){ qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_NO_PREROLL" << "Returncode =" << ret; }// 3
     if ( ret == GST_STATE_CHANGE_FAILURE )
     {
-        qDebug().noquote() << global::nameOutput << "Unable to set the pipeline to the playing state.";
+        qDebug().noquote() << global::nameOutput << "[Convert] Unable to set the pipeline to the playing state.";
         gst_object_unref( pipeline );
         return;
     }
-
-
-
 }
