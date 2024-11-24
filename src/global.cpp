@@ -32,4 +32,6 @@ namespace global
     int showclickCounter = 0;
     QLineEdit *lineEditWASAPIWatcher;
     QList<QLineEdit*> *listChildren;
+    QLineEdit *lineEditConvertMP4;
+
 }

@@ -46,6 +46,7 @@ public slots:
 private slots:
     void slot_convert_openfiledialog_mkv_to_mp4(bool);
     void slot_convert_mkv_to_mp4(bool);
+    void slot_lineEdit_Convert_begin_MP4(QString);
 
 signals:
 

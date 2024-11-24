@@ -723,6 +723,8 @@ QStringList QvkMainWindow_wl::VK_getSelectedAudioDevice()
     return list;
 }
 
+QMessageBox *msgBox;
+
 //---------------------------------------------------------------------------------------------------
 GstBusSyncReply QvkMainWindow_wl::call_bus_message( GstBus *bus, GstMessage *message, gpointer user_data )
 {
@@ -733,8 +735,10 @@ GstBusSyncReply QvkMainWindow_wl::call_bus_message( GstBus *bus, GstMessage *mes
             qDebug().noquote() << global::nameOutput << "GST_MESSAGE_ERROR";
             break;
         case GST_MESSAGE_EOS:
-            qDebug().noquote() << global::nameOutput << "GST_MESSAGE_EOS";
-            break;
+        {qDebug().noquote() << global::nameOutput << "GST_MESSAGE_EOS";
+            msgBox->setText("The document has been modified.");
+            msgBox->exec();
+            break; }
         case GST_MESSAGE_DURATION_CHANGED:
             qDebug().noquote() << global::nameOutput << "GST_MESSAGE_DURATION_CHANGED";
             break;

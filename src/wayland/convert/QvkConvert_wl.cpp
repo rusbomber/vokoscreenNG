@@ -26,10 +26,14 @@
 
 #include <QDebug>
 #include <QStandardPaths>
+#include <QMessageBox>
 
 QvkConvert_wl::QvkConvert_wl( QvkMainWindow_wl *vkMainWindow, Ui_formMainWindow_wl *vk_ui )
 {
     ui = vk_ui;
+    global::lineEditConvertMP4 = new QLineEdit;
+    connect( global::lineEditConvertMP4, SIGNAL( textChanged(QString) ), this, SLOT( slot_lineEdit_Convert_begin_MP4(QString) ) );
+
     connect( ui->toolButton_convert_mkv, SIGNAL( clicked(bool) ), this, SLOT( slot_convert_openfiledialog_mkv_to_mp4(bool) ) );
     connect( ui->pushButton_convert_mp4, SIGNAL( clicked(bool) ), this, SLOT( slot_convert_mkv_to_mp4(bool) ) );
 }
@@ -37,6 +41,15 @@ QvkConvert_wl::QvkConvert_wl( QvkMainWindow_wl *vkMainWindow, Ui_formMainWindow_
 
 QvkConvert_wl::~QvkConvert_wl()
 {
+}
+
+
+void QvkConvert_wl::slot_lineEdit_Convert_begin_MP4(QString)
+{
+    QMessageBox *msgBox = new QMessageBox(ui->centralwidget);
+    msgBox->addButton( QMessageBox::Close);
+    msgBox->setText("File was successfully converted to MP4");
+    msgBox->exec();
 }
 
 
@@ -61,18 +74,22 @@ void QvkConvert_wl::slot_convert_openfiledialog_mkv_to_mp4(bool)
     QApplication::setDesktopSettingsAware( true );
 }
 
-
+int counterConvert = 0;
 GstBusSyncReply QvkConvert_wl::call_bus_message_convert( GstBus *bus, GstMessage *message, gpointer user_data )
 {
     Q_UNUSED(bus);
     Q_UNUSED(user_data)
-    switch (GST_MESSAGE_TYPE (message)) {
+    switch(GST_MESSAGE_TYPE (message))
+    {
         case GST_MESSAGE_ERROR:
             qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_ERROR";
             break;
-        case GST_MESSAGE_EOS:
+        case GST_MESSAGE_EOS: {
             qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_EOS";
+            counterConvert++;
+            global::lineEditConvertMP4->setText( QString::number( counterConvert ) );
             break;
+        }
         case GST_MESSAGE_DURATION_CHANGED:
             qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_DURATION_CHANGED";
             break;
