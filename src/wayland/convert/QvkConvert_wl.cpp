@@ -121,9 +121,9 @@ void QvkConvert_wl::slot_convert_mkv_to_mp4(bool)
     GError *error = Q_NULLPTR;
     pipeline = gst_parse_launch( line, &error );
 
-    static GstBus *bus = gst_pipeline_get_bus( GST_PIPELINE ( pipeline ) );
-//    gst_bus_set_sync_handler( bus, (GstBusSyncHandler)call_bus_message_convert, this, NULL );
-    //gst_object_unref( bus );
+    GstBus *bus = gst_pipeline_get_bus( GST_PIPELINE ( pipeline ) );
+    gst_bus_set_sync_handler( bus, (GstBusSyncHandler)call_bus_message_convert, this, NULL );
+    gst_object_unref( bus );
 
     // Start playing
     GstStateChangeReturn ret = gst_element_set_state( pipeline, GST_STATE_PLAYING );
