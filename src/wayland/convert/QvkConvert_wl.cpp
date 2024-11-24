@@ -30,9 +30,10 @@
 
 QvkConvert_wl::QvkConvert_wl( QvkMainWindow_wl *vkMainWindow, Ui_formMainWindow_wl *vk_ui )
 {
+    Q_UNUSED(vkMainWindow)
     ui = vk_ui;
     global::lineEditConvertMP4 = new QLineEdit;
-    connect( global::lineEditConvertMP4, SIGNAL( textChanged(QString) ), this, SLOT( slot_lineEdit_Convert_begin_MP4(QString) ) );
+    connect( global::lineEditConvertMP4, SIGNAL( textChanged(QString) ), this, SLOT( slot_lineEdit_Convert_eos_MP4(QString) ) );
 
     connect( ui->toolButton_convert_mkv, SIGNAL( clicked(bool) ), this, SLOT( slot_convert_openfiledialog_mkv_to_mp4(bool) ) );
     connect( ui->pushButton_convert_mp4, SIGNAL( clicked(bool) ), this, SLOT( slot_convert_mkv_to_mp4(bool) ) );
@@ -44,12 +45,17 @@ QvkConvert_wl::~QvkConvert_wl()
 }
 
 
-void QvkConvert_wl::slot_lineEdit_Convert_begin_MP4(QString)
+void QvkConvert_wl::slot_lineEdit_Convert_eos_MP4(QString)
 {
-    QPalette palette = ui->label_convert_MP4->palette();
-    palette.setColor( QPalette::Window, QColor( Qt::green ) );
-    ui->label_convert_MP4->setAutoFillBackground(true);
-    ui->label_convert_MP4->setPalette(palette);
+    QPalette palette_1 = ui->widget_convert_MP4->palette();
+    palette_1.setColor( QPalette::Window, QColor( Qt::green ) );
+    ui->widget_convert_MP4->setAutoFillBackground( true );
+    ui->widget_convert_MP4->setPalette( palette_1 );
+
+    QPalette palette_2 = ui->label_convert_MP4->palette();
+    palette_2.setColor( QPalette::Window, QColor( Qt::green ) );
+    ui->label_convert_MP4->setAutoFillBackground( true );
+    ui->label_convert_MP4->setPalette( palette_2 );
     ui->label_convert_MP4->setText( "File was successfully converted to MP4" );
 }
 
@@ -69,6 +75,7 @@ void QvkConvert_wl::slot_convert_openfiledialog_mkv_to_mp4(bool)
             pathFile = vkFileDialog.selectedFiles().at(0);
             ui->lineEditConvert->setText( pathFile );
             ui->pushButton_convert_mp4->setEnabled( true );
+            ui->label_convert_MP4->setText( "Please start convert" );
         }
     }
 

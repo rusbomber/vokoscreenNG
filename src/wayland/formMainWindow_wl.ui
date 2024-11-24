@@ -2883,30 +2883,78 @@
               <string notr="true"/>
              </attribute>
              <layout class="QVBoxLayout" name="verticalLayout_23">
-              <item alignment="Qt::AlignHCenter">
-               <widget class="QLabel" name="label_3">
-                <property name="font">
-                 <font>
-                  <pointsize>14</pointsize>
-                 </font>
-                </property>
-                <property name="text">
-                 <string notr="true">Convert</string>
-                </property>
-               </widget>
-              </item>
               <item>
-               <widget class="Line" name="line_7">
-                <property name="styleSheet">
-                 <string notr="true">color: rgb(200, 200, 200);</string>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
+               <layout class="QHBoxLayout" name="horizontalLayout_18">
+                <item>
+                 <spacer name="horizontalSpacer_10">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_3">
+                  <property name="font">
+                   <font>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string notr="true">Convert</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_5">
+                  <property name="maximumSize">
+                   <size>
+                    <width>22</width>
+                    <height>22</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string notr="true"/>
+                  </property>
+                  <property name="pixmap">
+                   <pixmap resource="../screencast.qrc">:/pictures/fileDirDialog/forwardButton.png</pixmap>
+                  </property>
+                  <property name="scaledContents">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_6">
+                  <property name="font">
+                   <font>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>MP4</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
               </item>
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_24">
@@ -2935,20 +2983,49 @@
                      <bool>false</bool>
                     </property>
                     <property name="text">
-                     <string notr="true">MP4</string>
+                     <string notr="true"/>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="../screencast.qrc">
+                      <normaloff>:/pictures/screencast/accept.png</normaloff>:/pictures/screencast/accept.png</iconset>
                     </property>
                    </widget>
                   </item>
                  </layout>
                 </item>
-                <item alignment="Qt::AlignHCenter">
-                 <widget class="QLabel" name="label_convert_MP4">
-                  <property name="text">
-                   <string>Please wait</string>
-                  </property>
+                <item>
+                 <widget class="QWidget" name="widget_convert_MP4" native="true">
+                  <layout class="QHBoxLayout" name="horizontalLayout_19">
+                   <item alignment="Qt::AlignHCenter">
+                    <widget class="QLabel" name="label_convert_MP4">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Please select a file</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                </layout>
+              </item>
+              <item>
+               <widget class="Line" name="line_10">
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(200, 200, 200);</string>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
               </item>
               <item>
                <spacer name="verticalSpacer_11">
