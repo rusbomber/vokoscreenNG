@@ -46,10 +46,11 @@ QvkConvert_wl::~QvkConvert_wl()
 
 void QvkConvert_wl::slot_lineEdit_Convert_begin_MP4(QString)
 {
-    QMessageBox *msgBox = new QMessageBox(ui->centralwidget);
-    msgBox->addButton( QMessageBox::Close);
-    msgBox->setText("File was successfully converted to MP4");
-    msgBox->exec();
+    QPalette palette = ui->label_convert_MP4->palette();
+    palette.setColor( QPalette::Window, QColor( Qt::green ) );
+    ui->label_convert_MP4->setAutoFillBackground(true);
+    ui->label_convert_MP4->setPalette(palette);
+    ui->label_convert_MP4->setText( "File was successfully converted to MP4" );
 }
 
 
