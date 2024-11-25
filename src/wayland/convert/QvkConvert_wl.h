@@ -38,7 +38,8 @@ public:
 
 private:
     static GstBusSyncReply call_bus_message_convert( GstBus *bus, GstMessage *message, gpointer user_data );
-
+    QPalette paletteConvertWidget;
+    QPalette paletteConvertLabel;
 
 public slots:
 

@@ -37,6 +37,22 @@ QvkConvert_wl::QvkConvert_wl( QvkMainWindow_wl *vkMainWindow, Ui_formMainWindow_
 
     connect( ui->toolButton_convert_mkv, SIGNAL( clicked(bool) ), this, SLOT( slot_convert_openfiledialog_mkv_to_mp4(bool) ) );
     connect( ui->pushButton_convert_mp4, SIGNAL( clicked(bool) ), this, SLOT( slot_convert_mkv_to_mp4(bool) ) );
+
+    // Hintergrundfarbe für Widget setzen
+    QPalette palette_1 = ui->widget_convert_MP4->palette();
+    palette_1.setColor( QPalette::Window, QColor( QColor( 239, 240, 241 ) ) );
+    ui->widget_convert_MP4->setAutoFillBackground( true );
+    ui->widget_convert_MP4->setPalette( palette_1 );
+
+    // Hintergrundfarbe für label setzen
+    QPalette palette_2 = ui->label_convert_MP4->palette();
+    palette_2.setColor( QPalette::Window, QColor( QColor( 239, 240, 241 ) ) );
+    ui->label_convert_MP4->setAutoFillBackground( true );
+    ui->label_convert_MP4->setPalette( palette_2 );
+
+    // Hintergrundfarbe für Widget und Label in Variable für späteren gebrauch
+    paletteConvertWidget = ui->widget_convert_MP4->palette();
+    paletteConvertLabel = ui->label_convert_MP4->palette();
 }
 
 
@@ -56,7 +72,7 @@ void QvkConvert_wl::slot_lineEdit_Convert_eos_MP4(QString)
     palette_2.setColor( QPalette::Window, QColor( Qt::green ) );
     ui->label_convert_MP4->setAutoFillBackground( true );
     ui->label_convert_MP4->setPalette( palette_2 );
-    ui->label_convert_MP4->setText( "File was successfully converted to MP4" );
+    ui->label_convert_MP4->setText( "File was successfully converted" );
 }
 
 
@@ -76,6 +92,12 @@ void QvkConvert_wl::slot_convert_openfiledialog_mkv_to_mp4(bool)
             ui->lineEditConvert->setText( pathFile );
             ui->pushButton_convert_mp4->setEnabled( true );
             ui->label_convert_MP4->setText( "Please start convert" );
+
+            ui->widget_convert_MP4->setAutoFillBackground( true );
+            ui->widget_convert_MP4->setPalette( paletteConvertWidget );
+
+            ui->label_convert_MP4->setAutoFillBackground( true );
+            ui->label_convert_MP4->setPalette( paletteConvertLabel );
         }
     }
 

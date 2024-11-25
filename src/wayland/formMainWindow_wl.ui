@@ -2995,6 +2995,10 @@
                 </item>
                 <item>
                  <widget class="QWidget" name="widget_convert_MP4" native="true">
+                  <property name="styleSheet">
+                   <string notr="true">
+</string>
+                  </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_19">
                    <item alignment="Qt::AlignHCenter">
                     <widget class="QLabel" name="label_convert_MP4">
@@ -3216,7 +3220,7 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>
