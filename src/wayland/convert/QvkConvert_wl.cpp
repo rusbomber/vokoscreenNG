@@ -292,6 +292,7 @@ static void print_topology (GstDiscovererStreamInfo * info, gint depth)
 // one of the URIs we provided.
 static void on_discovered_cb (GstDiscoverer * discoverer, GstDiscovererInfo * info, GError * err, CustomData * data)
 {
+  Q_UNUSED(discoverer)
   GstDiscovererResult result;
   const gchar *uri;
   const GstTagList *tags;
@@ -363,7 +364,8 @@ static void on_discovered_cb (GstDiscoverer * discoverer, GstDiscovererInfo * in
 // This function is called when the discoverer has finished examining all the URIs we provided.
 static void on_finished_cb (GstDiscoverer * discoverer, CustomData * data)
 {
-  g_print( "Finished discovering\n" );
+  Q_UNUSED(discoverer)
+  g_print( "Finished discovering\n\n" );
   g_main_loop_quit( data->loop );
 }
 
@@ -385,8 +387,6 @@ void QvkConvert_wl::slot_test_dicover_1( QString filePath )
 
   // Initialize cumstom data structure
   memset (&data, 0, sizeof (data));
-
-  g_print ("Discovering '%s'\n", uri);
 
   // Instantiate the Discoverer
   data.discoverer = gst_discoverer_new (5 * GST_SECOND, &err);
