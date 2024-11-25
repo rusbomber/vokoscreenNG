@@ -220,7 +220,9 @@ static void print_tag_foreach( const GstTagList *tags, const gchar *tag, gpointe
     str = gst_value_serialize( &val );
   }
 
-  g_print( "%*s%s: %s\n", 2 * depth, " ", gst_tag_get_nick (tag), str );
+//  g_print( "%*s%s: %s\n", 2 * depth, " ", gst_tag_get_nick (tag), str ); // Übersetzung
+  g_print( "%*s%s: %s\n", 2 * depth, " ", tag, str );  // English
+
   g_free( str );
 
   g_value_unset( &val );
