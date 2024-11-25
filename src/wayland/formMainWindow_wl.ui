@@ -236,7 +236,7 @@
          <enum>QTabWidget::West</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="tab_sidebar_screeancast">
          <attribute name="title">
@@ -1514,8 +1514,8 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>449</width>
-                     <height>429</height>
+                     <width>98</width>
+                     <height>98</height>
                     </rect>
                    </property>
                    <layout class="QGridLayout" name="gridLayoutAvailable">
@@ -2906,7 +2906,7 @@
                    </font>
                   </property>
                   <property name="text">
-                   <string notr="true">Convert</string>
+                   <string notr="true">Convert MKV</string>
                   </property>
                  </widget>
                 </item>
