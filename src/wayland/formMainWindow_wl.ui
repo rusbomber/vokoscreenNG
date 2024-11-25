@@ -592,8 +592,8 @@
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>409</width>
-                          <height>122</height>
+                          <width>16</width>
+                          <height>16</height>
                          </rect>
                         </property>
                         <property name="accessibleName">
@@ -1514,7 +1514,7 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>98</width>
+                     <width>20</width>
                      <height>98</height>
                     </rect>
                    </property>
@@ -2906,7 +2906,7 @@
                    </font>
                   </property>
                   <property name="text">
-                   <string notr="true">Convert MKV</string>
+                   <string notr="true">Convert mkv</string>
                   </property>
                  </widget>
                 </item>
@@ -2937,7 +2937,7 @@
                    </font>
                   </property>
                   <property name="text">
-                   <string notr="true">MP4</string>
+                   <string notr="true">mp4</string>
                   </property>
                  </widget>
                 </item>
