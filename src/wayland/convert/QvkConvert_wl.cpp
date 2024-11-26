@@ -35,7 +35,7 @@ QvkConvert_wl::QvkConvert_wl( QvkMainWindow_wl *vkMainWindow, Ui_formMainWindow_
     global::lineEditConvertMP4 = new QLineEdit;
     connect( global::lineEditConvertMP4, SIGNAL( textChanged(QString) ), this, SLOT( slot_lineEdit_Convert_eos_MP4(QString) ) );
 
-    connect( ui->toolButton_convert_mkv, SIGNAL( clicked(bool) ), this, SLOT( slot_convert_openfiledialog_mkv_to_mp4(bool) ) );
+    connect( ui->toolButton_convert_dialog_mkv_to_mp4, SIGNAL( clicked(bool) ), this, SLOT( slot_convert_openfiledialog_mkv_to_mp4(bool) ) );
     connect( ui->pushButton_convert_mp4, SIGNAL( clicked(bool) ), this, SLOT( slot_convert_mkv_to_mp4(bool) ) );
 
     // Hintergrundfarbe für Widget setzen
@@ -56,7 +56,7 @@ QvkConvert_wl::QvkConvert_wl( QvkMainWindow_wl *vkMainWindow, Ui_formMainWindow_
 
 
 
-    connect( ui->toolButton_convert_mkv, SIGNAL( clicked(bool) ), this, SLOT( slot_test_dicover(bool) ) );
+    connect( ui->toolButton_convert_dialog_mkv_to_mp4, SIGNAL( clicked(bool) ), this, SLOT( slot_test_dicover(bool) ) );
 
 }
 
@@ -78,6 +78,9 @@ void QvkConvert_wl::slot_lineEdit_Convert_eos_MP4(QString)
     ui->label_convert_MP4->setAutoFillBackground( true );
     ui->label_convert_MP4->setPalette( palette_2 );
     ui->label_convert_MP4->setText( "File was successfully converted" );
+
+    ui->toolButton_convert_dialog_mkv_to_mp4->setDisabled( false );
+    ui->pushButton_convert_mp4->setDisabled( false );
 }
 
 
@@ -155,6 +158,20 @@ GstBusSyncReply QvkConvert_wl::call_bus_message_convert( GstBus *bus, GstMessage
 
 void QvkConvert_wl::slot_convert_mkv_to_mp4(bool)
 {
+    ui->toolButton_convert_dialog_mkv_to_mp4->setDisabled( true );
+    ui->pushButton_convert_mp4->setDisabled( true );
+
+    // Hintergrundfarbe für Widget setzen
+    QPalette palette_1 = ui->widget_convert_MP4->palette();
+    palette_1.setColor( QPalette::Window, QColor( QColor( 239, 240, 241 ) ) );
+    ui->widget_convert_MP4->setAutoFillBackground( true );
+    ui->widget_convert_MP4->setPalette( palette_1 );
+    // Hintergrundfarbe für label setzen
+    QPalette palette_2 = ui->label_convert_MP4->palette();
+    palette_2.setColor( QPalette::Window, QColor( QColor( 239, 240, 241 ) ) );
+    ui->label_convert_MP4->setAutoFillBackground( true );
+    ui->label_convert_MP4->setPalette( palette_2 );    ui->label_convert_MP4->setText( "Please wait" );
+
     GstElement *pipeline = nullptr;
 
     QString filePath = ui->lineEditConvert->text();
@@ -192,7 +209,7 @@ void QvkConvert_wl::slot_convert_mkv_to_mp4(bool)
 }
 
 
-//---------------------------------------------------------------------------------------------------------------------
+//----------------------------------------- Begin discover ----------------------------------------------------------------------------
 // https://github.com/GStreamer/gst-docs/blob/master/examples/tutorials/basic-tutorial-9.c
 #include <string.h>
 #include <gst/gst.h>
