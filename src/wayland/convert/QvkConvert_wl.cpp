@@ -56,7 +56,7 @@ QvkConvert_wl::QvkConvert_wl( QvkMainWindow_wl *vkMainWindow, Ui_formMainWindow_
 
 
 
-    connect( ui->toolButton_convert_dialog_mkv_to_mp4, SIGNAL( clicked(bool) ), this, SLOT( slot_test_dicover(bool) ) );
+    connect( ui->toolButton_convert_dialog_mkv_to_mp4, SIGNAL( clicked(bool) ), this, SLOT( slot_dicover_set_filePath(bool) ) );
 
 }
 
@@ -390,13 +390,13 @@ static void on_finished_cb (GstDiscoverer * discoverer, CustomData * data)
 }
 
 
-void QvkConvert_wl::slot_test_dicover(bool)
+void QvkConvert_wl::slot_dicover_set_filePath(bool)
 {
-    slot_test_dicover_1( "file://" + ui->lineEditConvert->text() );
+    slot_dicover_start( "file://" + ui->lineEditConvert->text() );
 }
 
 
-void QvkConvert_wl::slot_test_dicover_1( QString filePath )
+void QvkConvert_wl::slot_dicover_start( QString filePath )
 {
   CustomData data;
   GError *err = NULL;

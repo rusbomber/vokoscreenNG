@@ -49,8 +49,8 @@ private slots:
     void slot_convert_mkv_to_mp4(bool);
     void slot_lineEdit_Convert_eos_MP4(QString);
 
-    void slot_test_dicover(bool);
-    void slot_test_dicover_1( QString filePath );
+    void slot_dicover_set_filePath(bool);
+    void slot_dicover_start( QString filePath );
 
 
 signals:
