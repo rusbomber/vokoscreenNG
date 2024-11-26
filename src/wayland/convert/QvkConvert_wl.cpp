@@ -170,7 +170,8 @@ void QvkConvert_wl::slot_convert_mkv_to_mp4(bool)
     QPalette palette_2 = ui->label_convert_MP4->palette();
     palette_2.setColor( QPalette::Window, QColor( QColor( 239, 240, 241 ) ) );
     ui->label_convert_MP4->setAutoFillBackground( true );
-    ui->label_convert_MP4->setPalette( palette_2 );    ui->label_convert_MP4->setText( "Please wait" );
+    ui->label_convert_MP4->setPalette( palette_2 );
+    ui->label_convert_MP4->setText( "Please wait" );
 
     GstElement *pipeline = nullptr;
 
