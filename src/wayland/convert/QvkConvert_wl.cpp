@@ -239,7 +239,11 @@ static void print_tag_foreach( const GstTagList *tags, const gchar *tag, gpointe
   }
 
 //  g_print( "%*s%s: %s\n", 2 * depth, " ", gst_tag_get_nick (tag), str ); // Übersetzung
-  g_print( "%*s%s: %s\n", 2 * depth, " ", tag, str );  // English
+  g_print( "[vokoscreenNG] %*s%s: %s\n", 2 * depth, " ", tag, str );  // English
+
+
+//  g_print( "[vokoscreenNG] %s: %s\n", tag, str );
+
 
   g_free( str );
 
@@ -264,7 +268,7 @@ static void print_stream_info (GstDiscovererStreamInfo * info, gint depth)
     gst_caps_unref( caps );
   }
 
-  g_print( "%*s%s: %s\n", 2 * depth, " ",
+  g_print( "[vokoscreenNG] %*s%s: %s\n", 2 * depth, " ",
       gst_discoverer_stream_info_get_stream_type_nick( info ),
       ( desc ? desc : "" ) );
 
@@ -275,7 +279,7 @@ static void print_stream_info (GstDiscovererStreamInfo * info, gint depth)
 
   tags = gst_discoverer_stream_info_get_tags( info );
   if ( tags ) {
-    g_print( "%*sTags:\n", 2 * ( depth + 1 ), " " );
+    g_print( "[vokoscreenNG] %*sTags:\n", 2 * ( depth + 1 ), " " );
     gst_tag_list_foreach( tags, print_tag_foreach, GINT_TO_POINTER( depth + 2 ) );
   }
 }
@@ -322,16 +326,16 @@ static void on_discovered_cb (GstDiscoverer * discoverer, GstDiscovererInfo * in
   result = gst_discoverer_info_get_result (info);
   switch (result) {
     case GST_DISCOVERER_URI_INVALID:
-      g_print ("Invalid URI '%s'\n", uri);
+      g_print ("[vokoscreenNG] Invalid URI '%s'\n", uri);
       break;
     case GST_DISCOVERER_ERROR:
-      g_print ("Discoverer error: %s\n", err->message);
+      g_print ("[vokoscreenNG] Discoverer error: %s\n", err->message);
       break;
     case GST_DISCOVERER_TIMEOUT:
-      g_print ("Timeout\n");
+      g_print ("[vokoscreenNG] Timeout\n");
       break;
     case GST_DISCOVERER_BUSY:
-      g_print ("Busy\n");
+      g_print ("[vokoscreenNG] Busy\n");
       break;
     case GST_DISCOVERER_MISSING_PLUGINS:{
       const GstStructure *s;
@@ -340,31 +344,31 @@ static void on_discovered_cb (GstDiscoverer * discoverer, GstDiscovererInfo * in
       s = gst_discoverer_info_get_misc (info);
       str = gst_structure_to_string (s);
 
-      g_print ("Missing plugins: %s\n", str);
+      g_print ("[vokoscreenNG] Missing plugins: %s\n", str);
       g_free (str);
       break;
     }
     case GST_DISCOVERER_OK:
-      g_print ("Discovered '%s'\n", uri);
+      g_print ("[vokoscreenNG] Discovered '%s'\n", uri);
       break;
   }
 
   if (result != GST_DISCOVERER_OK) {
-    g_printerr ("This URI cannot be played\n");
+    g_printerr ("[vokoscreenNG] This URI cannot be played\n");
     return;
   }
 
   // If we got no error, show the retrieved information
 
-  g_print( "\nDuration: %" GST_TIME_FORMAT "\n", GST_TIME_ARGS( gst_discoverer_info_get_duration( info ) ) );
+  g_print( "\n[vokoscreenNG] Duration: %" GST_TIME_FORMAT "\n", GST_TIME_ARGS( gst_discoverer_info_get_duration( info ) ) );
 
   tags = gst_discoverer_info_get_tags (info);
   if (tags) {
-    g_print ("Tags:\n");
+    g_print ("[vokoscreenNG] Tags:\n");
     gst_tag_list_foreach (tags, print_tag_foreach, GINT_TO_POINTER (1));
   }
 
-  g_print ("Seekable: %s\n", (gst_discoverer_info_get_seekable (info) ? "yes" : "no"));
+  g_print ("[vokoscreenNG] Seekable: %s\n", (gst_discoverer_info_get_seekable (info) ? "yes" : "no"));
 
   g_print ("\n");
 
@@ -372,7 +376,7 @@ static void on_discovered_cb (GstDiscoverer * discoverer, GstDiscovererInfo * in
   if (!sinfo)
     return;
 
-  g_print ("Stream information:\n");
+  g_print ("[vokoscreenNG] Stream information:\n");
 
   print_topology (sinfo, 1);
 
@@ -385,7 +389,7 @@ static void on_discovered_cb (GstDiscoverer * discoverer, GstDiscovererInfo * in
 static void on_finished_cb (GstDiscoverer * discoverer, CustomData * data)
 {
   Q_UNUSED(discoverer)
-  g_print( "Finished discovering\n\n" );
+  g_print( "[vokoscreenNG] Finished discovering\n\n" );
   g_main_loop_quit( data->loop );
 }
 
@@ -411,7 +415,7 @@ void QvkConvert_wl::slot_dicover_start( QString filePath )
   // Instantiate the Discoverer
   data.discoverer = gst_discoverer_new (5 * GST_SECOND, &err);
   if (!data.discoverer) {
-    g_print ("Error creating discoverer instance: %s\n", err->message);
+    g_print ("[vokoscreenNG] Error creating discoverer instance: %s\n", err->message);
     g_clear_error (&err);
 //    return -1;
   }
@@ -425,7 +429,7 @@ void QvkConvert_wl::slot_dicover_start( QString filePath )
 
   // Add a request to process asynchronously the URI passed through the command line
   if (!gst_discoverer_discover_uri_async (data.discoverer, uri)) {
-    g_print ("Failed to start discovering URI '%s'\n", uri);
+    g_print ("[vokoscreenNG] Failed to start discovering URI '%s'\n", uri);
     g_object_unref (data.discoverer);
 //    return -1;
   }
