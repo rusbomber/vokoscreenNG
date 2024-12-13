@@ -1514,7 +1514,7 @@
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>20</width>
+                     <width>98</width>
                      <height>98</height>
                     </rect>
                    </property>
@@ -2999,6 +2999,21 @@
                    <string notr="true"/>
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_19">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
                    <item alignment="Qt::AlignHCenter">
                     <widget class="QLabel" name="label_convert_MP4">
                      <property name="sizePolicy">
@@ -3219,7 +3234,7 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>
