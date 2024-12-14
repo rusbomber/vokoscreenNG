@@ -28,6 +28,9 @@
 #include <QStandardPaths>
 #include <QMessageBox>
 
+QString convert_video_codec;
+QString convert_audio_codec;
+
 QvkConvert_wl::QvkConvert_wl( QvkMainWindow_wl *vkMainWindow, Ui_formMainWindow_wl *vk_ui )
 {
     Q_UNUSED(vkMainWindow)
@@ -158,6 +161,30 @@ GstBusSyncReply QvkConvert_wl::call_bus_message_convert( GstBus *bus, GstMessage
 
 void QvkConvert_wl::slot_convert_mkv_to_mp4(bool)
 {
+    QString video_codec;
+    if ( convert_video_codec.contains( "H264" ) ) {
+        video_codec = "H264";
+    }
+
+    QString audio_codec;
+    if ( convert_audio_codec.contains( "Vorbis" ) ) {
+        audio_codec = "Vorbis";
+    }
+    if ( convert_audio_codec.contains( "MPEG" ) ) {
+        audio_codec = "MPEG";
+    }
+    if ( convert_audio_codec.contains( "FLAC" ) ) {
+        audio_codec = "FLAC";
+    }
+    if ( convert_audio_codec.contains( "Opus" ) ) {
+        audio_codec = "Opus";
+    }
+
+    qDebug() << "----------------" << video_codec;
+    qDebug() << "----------------" << audio_codec;
+
+
+
     ui->toolButton_convert_dialog_mkv_to_mp4->setDisabled( true );
     ui->pushButton_convert_mp4->setDisabled( true );
 
@@ -241,9 +268,14 @@ static void print_tag_foreach( const GstTagList *tags, const gchar *tag, gpointe
 //  g_print( "%*s%s: %s\n", 2 * depth, " ", gst_tag_get_nick (tag), str ); // Übersetzung
   g_print( "[vokoscreenNG] %*s%s: %s\n", 2 * depth, " ", tag, str );  // English
 
-
-//  g_print( "[vokoscreenNG] %s: %s\n", tag, str );
-
+  QString m_tag = tag;
+  QString m_str = str;
+  if ( m_tag == "video-codec" ) {
+      convert_video_codec = m_str;
+  }
+  if ( m_tag == "audio-codec" ) {
+      convert_audio_codec = m_str;
+  }
 
   g_free( str );
 
