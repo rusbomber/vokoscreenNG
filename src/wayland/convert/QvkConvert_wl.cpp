@@ -233,6 +233,24 @@ void QvkConvert_wl::slot_convert_mkv_to_mp4(bool)
                 "demux.audio_0 ! queue ! mpegaudioparse ! mux.";
     }
 
+/*
+    gst-launch-1.0 -e filesrc location=/home/vk/Videos/vokoscreenNG-mit-audio.mkv ! matroskademux name=demux \
+       mp4mux name=mux ! filesink location=test2.mp4 \
+       demux.video_0 ! queue ! h264parse ! mux. \
+       demux.audio_0 ! queue ! opusparse ! mux.
+*/
+    if ( audio_codec == "Opus" ) {
+        QString fileNameMP4 = fileInfo.baseName() + ".mp4";
+        VK_Pipeline = "filesrc location=" +
+                filePath +
+                " ! matroskademux name=demux mp4mux name=mux ! filesink location=" +
+                path +
+                "/" +
+                fileNameMP4 + " "
+                "demux.video_0 ! queue ! h264parse ! mux." + " " +
+                "demux.audio_0 ! queue ! opusparse ! mux.";
+    }
+
     qDebug().noquote() << global::nameOutput << VK_Pipeline;
 
     QByteArray byteArray = VK_Pipeline.toUtf8();
