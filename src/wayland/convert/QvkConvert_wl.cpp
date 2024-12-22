@@ -180,10 +180,8 @@ void QvkConvert_wl::slot_convert_mkv_to_mp4(bool)
         audio_codec = "Opus";
     }
 
-    qDebug() << "----------------" << video_codec;
-    qDebug() << "----------------" << audio_codec;
-
-
+    qDebug().noquote() << global::nameOutput << "Detected video codec" << video_codec;
+    qDebug().noquote() << global::nameOutput << "Detected audio codec" << audio_codec;
 
     ui->toolButton_convert_dialog_mkv_to_mp4->setDisabled( true );
     ui->pushButton_convert_mp4->setDisabled( true );
@@ -205,13 +203,37 @@ void QvkConvert_wl::slot_convert_mkv_to_mp4(bool)
     QString filePath = ui->lineEditConvert->text();
     QFileInfo fileInfo( filePath );
     QString path = fileInfo.path();
-    QString fileNameMP4 = fileInfo.baseName() + ".mp4";
-    QString VK_Pipeline = "filesrc location=" +
-            filePath +
-            " ! matroskademux ! h264parse ! queue ! mp4mux name=mux ! filesink location=" +
-            path +
-            "/" +
-            fileNameMP4;
+
+    QString VK_Pipeline;
+    if ( audio_codec == "" ) {
+        QString fileNameMP4 = fileInfo.baseName() + ".mp4";
+        VK_Pipeline = "filesrc location=" +
+                filePath +
+                " ! matroskademux ! h264parse ! queue ! mp4mux name=mux ! filesink location=" +
+                path +
+                "/" +
+                fileNameMP4;
+    }
+
+    /*
+    gst-launch-1.0 -e filesrc location=/home/vk/Videos/vokoscreenNG-mit-audio.mkv ! matroskademux name=demux \
+       mp4mux name=mux ! filesink location=test2.mp4 \
+       demux.video_0 ! queue ! h264parse ! mux. \
+       demux.audio_0 ! queue ! mpegaudioparse ! mux.
+    */
+    if ( audio_codec == "MPEG" ) {
+        QString fileNameMP4 = fileInfo.baseName() + ".mp4";
+        VK_Pipeline = "filesrc location=" +
+                filePath +
+                " ! matroskademux name=demux mp4mux name=mux ! filesink location=" +
+                path +
+                "/" +
+                fileNameMP4 + " "
+                "demux.video_0 ! queue ! h264parse ! mux." + " " +
+                "demux.audio_0 ! queue ! mpegaudioparse ! mux.";
+    }
+
+    qDebug().noquote() << global::nameOutput << VK_Pipeline;
 
     QByteArray byteArray = VK_Pipeline.toUtf8();
     const gchar *line = byteArray.constData();
