@@ -86,7 +86,7 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
     ui->tabWidgetSideBar->tabBar()->hide();
     ui->toolButtonScreencast->click();
 
-//    ui->toolButtonCamera->hide();  // QvkCameraController_wl wurde auch deaktiviert ----------------------------
+    ui->toolButtonCamera->hide();  // QvkCameraController_wl wurde auch deaktiviert ----------------------------
 
     set_WindowTitle();
     ui->tabWidgetScreencast->setCurrentIndex( 0 );
