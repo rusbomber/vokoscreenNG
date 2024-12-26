@@ -592,8 +592,8 @@
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>409</width>
-                          <height>122</height>
+                          <width>16</width>
+                          <height>16</height>
                          </rect>
                         </property>
                         <property name="accessibleName">
@@ -3216,14 +3216,14 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QToolButton" name="toolButton_convert_dialog_mkv_to_mp4_2">
+                   <widget class="QToolButton" name="toolButton_convert_dialog_mkv_to_gif">
                     <property name="text">
                      <string notr="true">...</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="pushButton_convert_mp4_2">
+                   <widget class="QPushButton" name="pushButton_convert_gif">
                     <property name="enabled">
                      <bool>false</bool>
                     </property>
@@ -3239,7 +3239,7 @@
                  </layout>
                 </item>
                 <item>
-                 <widget class="QWidget" name="widget_convert_MP4_2" native="true">
+                 <widget class="QWidget" name="widget_convert_gif" native="true">
                   <property name="styleSheet">
                    <string notr="true"/>
                   </property>
@@ -3260,7 +3260,7 @@
                     <number>0</number>
                    </property>
                    <item alignment="Qt::AlignHCenter">
-                    <widget class="QLabel" name="label_convert_MP4_2">
+                    <widget class="QLabel" name="label_convert_gif">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
                        <horstretch>0</horstretch>
