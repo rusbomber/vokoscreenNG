@@ -33,5 +33,5 @@ namespace global
     QLineEdit *lineEditWASAPIWatcher;
     QList<QLineEdit*> *listChildren;
     QLineEdit *lineEditConvertMP4;
-
+    QLineEdit *lineEditConvertGIF;
 }
