@@ -29,7 +29,6 @@
 #include <QMessageBox>
 
 QString convert_video_codec_gif;
-QString convert_audio_codec_gif;
 
 QvkConvert_mkv_gif_wl::QvkConvert_mkv_gif_wl( QvkMainWindow_wl *vkMainWindow, Ui_formMainWindow_wl *vk_ui )
 {
@@ -269,9 +268,6 @@ static void print_tag_foreach( const GstTagList *tags, const gchar *tag, gpointe
     QString m_str = str;
     if ( m_tag == "video-codec" ) {
         convert_video_codec_gif = m_str;
-    }
-    if ( m_tag == "audio-codec" ) {
-        convert_audio_codec_gif = m_str;
     }
 
     g_free( str );
