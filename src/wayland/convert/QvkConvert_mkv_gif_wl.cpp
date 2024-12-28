@@ -254,6 +254,7 @@ void QvkConvert_mkv_gif_wl::slot_convert_mkv_to_gif(bool)
         qDebug().noquote() << global::nameOutput << "[Convert] " << "Only videos with H264 codec can convert.";
 
         QMessageBox msgBox;
+        msgBox.setModal( true );
         msgBox.setIcon( QMessageBox::Warning );
         msgBox.setText( "     Convert failed     " );
         msgBox.setInformativeText( "Only videos with H264 codec can convert." );
