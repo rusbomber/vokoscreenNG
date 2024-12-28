@@ -27,6 +27,7 @@
 #include "mainWindow_wl.h"
 
 #include <QWidget>
+#include <QTimer>
 
 class QvkConvert_mkv_gif_wl: public QWidget
 {
@@ -36,10 +37,15 @@ public:
     virtual ~QvkConvert_mkv_gif_wl();
     QvkMainWindow_wl *mainWindow;
 
+
 private:
     static GstBusSyncReply call_bus_message_convert_gif( GstBus *bus, GstMessage *message, gpointer user_data );
     QPalette paletteConvertWidget;
     QPalette paletteConvertLabel;
+
+    QTimer *timer;
+    GstElement *pipeline = nullptr;
+
 
 public slots:
 
@@ -52,8 +58,12 @@ private slots:
     void slot_dicover_set_filePath(bool);
     void slot_dicover_start( QString filePath );
 
+    void slot_timer();
+
 
 signals:
+    void signal_currentTime( qint64 currentTime );
+    void signal_duration( qint64 duration_second );
 
 
 protected:  

@@ -57,11 +57,30 @@ QvkConvert_mkv_gif_wl::QvkConvert_mkv_gif_wl( QvkMainWindow_wl *vkMainWindow, Ui
     paletteConvertLabel = ui->label_convert_mkv_to_gif->palette();
 
     connect( ui->toolButton_convert_dialog_mkv_to_gif, SIGNAL( clicked(bool) ), this, SLOT( slot_dicover_set_filePath(bool) ) );
+
+    timer = new QTimer;
+    timer->setTimerType( Qt::PreciseTimer );
+    timer->setInterval( 200 );
+    connect( timer, SIGNAL( timeout() ), this, SLOT( slot_timer() ) );
 }
 
 
 QvkConvert_mkv_gif_wl::~QvkConvert_mkv_gif_wl()
 {
+}
+
+
+void QvkConvert_mkv_gif_wl::slot_timer()
+{
+    gint64 duration;
+    gst_element_query_duration( pipeline, GST_FORMAT_TIME, &duration );
+
+    gint64 currentTime;
+    gst_element_query_position( pipeline, GST_FORMAT_TIME, &currentTime );
+
+    qint64 prozent = 100 / ( duration / 1000 / 1000 / 1000 ) * ( currentTime / 1000 / 1000 / 1000 );
+
+    ui->label_convert_mkv_to_gif->setText( QString::number( prozent ) + " %" );
 }
 
 
@@ -80,6 +99,9 @@ void QvkConvert_mkv_gif_wl::slot_lineEdit_Convert_eos_gif(QString)
 
     ui->toolButton_convert_dialog_mkv_to_gif->setDisabled( false );
     ui->pushButton_convert_mkv_to_gif->setDisabled( false );
+
+    timer->stop();
+    ui->label_convert_mkv_to_gif->setText( "100%" );
 }
 
 
@@ -180,7 +202,7 @@ void QvkConvert_mkv_gif_wl::slot_convert_mkv_to_gif(bool)
         ui->label_convert_mkv_to_gif->setPalette( palette_2 );
         ui->label_convert_mkv_to_gif->setText( "Please wait" );
 
-        GstElement *pipeline = nullptr;
+//        GstElement *pipeline = nullptr;
 
         QString filePath = ui->lineEdit_convert_mkv_to_gif->text();
         QFileInfo fileInfo( filePath );
@@ -213,6 +235,9 @@ void QvkConvert_mkv_gif_wl::slot_convert_mkv_to_gif(bool)
         GstBus *bus = gst_pipeline_get_bus( GST_PIPELINE ( pipeline ) );
         gst_bus_set_sync_handler( bus, (GstBusSyncHandler)call_bus_message_convert_gif, this, NULL );
         gst_object_unref( bus );
+
+        // Startet die Fortschrittanzeige in Prozent
+        timer->start();
 
         // Start playing
         GstStateChangeReturn ret = gst_element_set_state( pipeline, GST_STATE_PLAYING );

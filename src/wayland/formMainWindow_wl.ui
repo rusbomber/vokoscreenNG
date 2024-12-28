@@ -3267,11 +3267,6 @@
                        <verstretch>0</verstretch>
                       </sizepolicy>
                      </property>
-                     <property name="font">
-                      <font>
-                       <bold>true</bold>
-                      </font>
-                     </property>
                      <property name="text">
                       <string notr="true">Please select a file</string>
                      </property>
