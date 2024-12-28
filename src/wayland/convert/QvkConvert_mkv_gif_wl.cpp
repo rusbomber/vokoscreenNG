@@ -253,10 +253,11 @@ void QvkConvert_mkv_gif_wl::slot_convert_mkv_to_gif(bool)
         qDebug().noquote() << global::nameOutput << "[Convert] " << "Convert failed";
         qDebug().noquote() << global::nameOutput << "[Convert] " << "Only videos with H264 codec can convert.";
 
-        QMessageBox msgBox;
+        QMessageBox msgBox( ui->centralwidget );
         msgBox.setModal( true );
         msgBox.setIcon( QMessageBox::Warning );
-        msgBox.setText( "     Convert failed     " );
+        QString space = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+        msgBox.setText( space + "<b>Convert failed</b>" + space );
         msgBox.setInformativeText( "Only videos with H264 codec can convert." );
         msgBox.exec();
         return;
