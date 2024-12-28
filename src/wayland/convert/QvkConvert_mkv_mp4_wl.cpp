@@ -177,12 +177,11 @@ void QvkConvert_mkv_mp4_wl::slot_convert_mkv_to_mp4(bool)
         audio_codec = "Opus";
     }
 
+    qDebug().noquote() << global::nameOutput << "[Convert] Detected video codec:" << video_codec;
+    qDebug().noquote() << global::nameOutput << "[Convert] Detected audio codec:" << audio_codec;
 
     if ( video_codec == "H264" ) {
         if ( ( audio_codec == "" ) or ( audio_codec == "MPEG" ) or ( audio_codec == "Opus" ) ) {
-            qDebug().noquote() << global::nameOutput << "Detected video codec" << video_codec;
-            qDebug().noquote() << global::nameOutput << "Detected audio codec" << audio_codec;
-
             ui->toolButton_convert_dialog_mkv_to_mp4->setDisabled( true );
             ui->pushButton_convert_mkv_to_mp4->setDisabled( true );
 
@@ -242,8 +241,9 @@ void QvkConvert_mkv_mp4_wl::slot_convert_mkv_to_mp4(bool)
                         " ! matroskademux name=demux mp4mux name=mux ! filesink location=" +
                         path +
                         "/" +
-                        fileNameMP4 + " "
-                                      "demux.video_0 ! queue ! h264parse ! mux." + " " +
+                        fileNameMP4 +
+                        " "
+                        "demux.video_0 ! queue ! h264parse ! mux." + " " +
                         "demux.audio_0 ! queue ! opusparse ! mux.";
             }
 
@@ -275,8 +275,16 @@ void QvkConvert_mkv_mp4_wl::slot_convert_mkv_to_mp4(bool)
             return;
         }
     } else {
-        qDebug().noquote() << global::nameOutput << "[Convert] " << "-------------------";
-        return;
+        qDebug().noquote() << global::nameOutput << "[Convert] " << "Convert failed";
+        qDebug().noquote() << global::nameOutput << "[Convert] " << "Only videos with H264 codec can convert.";
+
+        QMessageBox msgBox( ui->centralwidget );
+        msgBox.setModal( true );
+        msgBox.setIcon( QMessageBox::Warning );
+        QString space = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+        msgBox.setText( space + "<b>Convert failed</b>" + space );
+        msgBox.setInformativeText( "Only videos with H264 codec can convert." );
+        msgBox.exec();
     }
 }
 
