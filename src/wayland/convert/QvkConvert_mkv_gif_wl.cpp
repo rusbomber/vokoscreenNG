@@ -260,7 +260,6 @@ void QvkConvert_mkv_gif_wl::slot_convert_mkv_to_gif(bool)
         msgBox.setText( space + "<b>Convert failed</b>" + space );
         msgBox.setInformativeText( "Only videos with H264 codec can convert." );
         msgBox.exec();
-        return;
     }
 }
 
