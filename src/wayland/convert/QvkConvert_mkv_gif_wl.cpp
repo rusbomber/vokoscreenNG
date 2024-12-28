@@ -101,7 +101,7 @@ void QvkConvert_mkv_gif_wl::slot_lineEdit_Convert_eos_gif(QString)
     ui->pushButton_convert_mkv_to_gif->setDisabled( false );
 
     timer->stop();
-    ui->label_convert_mkv_to_gif->setText( "100%" );
+    ui->label_convert_mkv_to_gif->setText( "100 %" );
 }
 
 
@@ -201,8 +201,6 @@ void QvkConvert_mkv_gif_wl::slot_convert_mkv_to_gif(bool)
         ui->label_convert_mkv_to_gif->setAutoFillBackground( true );
         ui->label_convert_mkv_to_gif->setPalette( palette_2 );
         ui->label_convert_mkv_to_gif->setText( "Please wait" );
-
-//        GstElement *pipeline = nullptr;
 
         QString filePath = ui->lineEdit_convert_mkv_to_gif->text();
         QFileInfo fileInfo( filePath );

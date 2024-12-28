@@ -62,8 +62,6 @@ private slots:
 
 
 signals:
-    void signal_currentTime( qint64 currentTime );
-    void signal_duration( qint64 duration_second );
 
 
 protected:  
