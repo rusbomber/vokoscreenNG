@@ -85,7 +85,6 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
         ui->pushButton_log_refresh->click();
     } );
     ui->tabWidgetSideBar->tabBar()->hide();
-    ui->toolButtonScreencast->click();
 
     ui->toolButtonCamera->hide();  // QvkCameraController_wl wurde auch deaktiviert ----------------------------
 
@@ -131,7 +130,7 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
     ui->line_cisco->hide();
     ui->label_Upate_tab_2->hide();
 
-    new QvkCameraController_wl( ui ); //------------------------------------------------------------------------
+//    new QvkCameraController_wl( ui ); //------------------------------------------------------------------------
     new QvkConvert_mkv_mp4_wl( this, ui );
     new QvkConvert_mkv_gif_wl( this, ui );
 
@@ -160,6 +159,10 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
     vkSettings.readAll( ui, this );
 
     connect( ui->pushButton_log_refresh, SIGNAL( clicked(bool) ), this, SLOT( slot_log_refresh() ) );
+
+    // Beim Start wird immer der selbe Tab geöffnet
+    ui->toolButtonScreencast->click();
+
  }
 
 
