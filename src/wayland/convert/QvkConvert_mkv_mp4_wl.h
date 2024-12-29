@@ -36,10 +36,14 @@ public:
     virtual ~QvkConvert_mkv_mp4_wl();
     QvkMainWindow_wl *mainWindow;
 
+
 private:
     static GstBusSyncReply call_bus_message_convert_mp4( GstBus *bus, GstMessage *message, gpointer user_data );
     QPalette paletteConvertWidget;
     QPalette paletteConvertLabel;
+    QTimer *timer;
+    GstElement *pipeline = nullptr;
+    void msgbox_mkv_to_mp4();
 
 public slots:
 
@@ -51,6 +55,8 @@ private slots:
 
     void slot_dicover_set_filePath(bool);
     void slot_dicover_start( QString filePath );
+
+    void slot_timer();
 
 
 signals:

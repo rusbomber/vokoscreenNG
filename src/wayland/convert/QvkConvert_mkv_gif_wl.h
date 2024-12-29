@@ -42,7 +42,6 @@ private:
     static GstBusSyncReply call_bus_message_convert_gif( GstBus *bus, GstMessage *message, gpointer user_data );
     QPalette paletteConvertWidget;
     QPalette paletteConvertLabel;
-
     QTimer *timer;
     GstElement *pipeline = nullptr;
 

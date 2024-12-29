@@ -27,6 +27,7 @@
 #include <QDebug>
 #include <QStandardPaths>
 #include <QMessageBox>
+#include <QTimer>
 
 QString convert_video_codec_mp4;
 QString convert_audio_codec_mp4;
@@ -58,11 +59,30 @@ QvkConvert_mkv_mp4_wl::QvkConvert_mkv_mp4_wl( QvkMainWindow_wl *vkMainWindow, Ui
     paletteConvertLabel = ui->label_convert_mkv_to_mp4->palette();
 
     connect( ui->toolButton_convert_dialog_mkv_to_mp4, SIGNAL( clicked(bool) ), this, SLOT( slot_dicover_set_filePath(bool) ) );
+
+    timer = new QTimer;
+    timer->setTimerType( Qt::PreciseTimer );
+    timer->setInterval( 200 );
+    connect( timer, SIGNAL( timeout() ), this, SLOT( slot_timer() ) );
 }
 
 
 QvkConvert_mkv_mp4_wl::~QvkConvert_mkv_mp4_wl()
 {
+}
+
+
+void QvkConvert_mkv_mp4_wl::slot_timer()
+{
+    gint64 duration;
+    gst_element_query_duration( pipeline, GST_FORMAT_TIME, &duration );
+
+    gint64 currentTime;
+    gst_element_query_position( pipeline, GST_FORMAT_TIME, &currentTime );
+
+    qint64 prozent = 100 / ( duration / 1000 / 1000 / 1000 ) * ( currentTime / 1000 / 1000 / 1000 );
+
+    ui->label_convert_mkv_to_mp4->setText( QString::number( prozent ) + " %" );
 }
 
 
@@ -81,12 +101,15 @@ void QvkConvert_mkv_mp4_wl::slot_lineEdit_Convert_eos_MP4(QString)
 
     ui->toolButton_convert_dialog_mkv_to_mp4->setDisabled( false );
     ui->pushButton_convert_mkv_to_mp4->setDisabled( false );
+
+    timer->stop();
+    ui->label_convert_mkv_to_mp4->setText( "100 %" );
 }
 
 
 void QvkConvert_mkv_mp4_wl::slot_convert_openfiledialog_mkv_to_mp4(bool)
 {
-//    QApplication::setDesktopSettingsAware( false );
+    //    QApplication::setDesktopSettingsAware( false );
 
     QString pathFile;
     QvkFileDialog vkFileDialog( this );
@@ -109,7 +132,7 @@ void QvkConvert_mkv_mp4_wl::slot_convert_openfiledialog_mkv_to_mp4(bool)
         }
     }
 
-//    QApplication::setDesktopSettingsAware( true );
+    //    QApplication::setDesktopSettingsAware( true );
 }
 
 int counterConvertMP4 = 0;
@@ -264,30 +287,34 @@ void QvkConvert_mkv_mp4_wl::slot_convert_mkv_to_mp4(bool)
             if ( ret == GST_STATE_CHANGE_SUCCESS )   { qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_SUCCESS" << "Returncode =" << ret;   } // 1
             if ( ret == GST_STATE_CHANGE_ASYNC )     { qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_ASYNC"   << "Returncode =" << ret;   } // 2
             if ( ret == GST_STATE_CHANGE_NO_PREROLL ){ qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_NO_PREROLL" << "Returncode =" << ret; }// 3
-            if ( ret == GST_STATE_CHANGE_FAILURE )
-            {
+            if ( ret == GST_STATE_CHANGE_FAILURE )   {
                 qDebug().noquote() << global::nameOutput << "[Convert] Unable to set the pipeline to the playing state.";
                 gst_object_unref( pipeline );
                 return;
             }
         } else {
-            qDebug().noquote() << global::nameOutput << "[Convert] " << "-------------------";
+            msgbox_mkv_to_mp4();
             return;
         }
     } else {
-        qDebug().noquote() << global::nameOutput << "[Convert] " << "Convert failed";
-        qDebug().noquote() << global::nameOutput << "[Convert] " << "Only videos with H264 codec can convert.";
-
-        QMessageBox msgBox( ui->centralwidget );
-        msgBox.setModal( true );
-        msgBox.setIcon( QMessageBox::Warning );
-        QString space = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-        msgBox.setText( space + "<b>Convert failed</b>" + space );
-        msgBox.setInformativeText( "Only videos with H264 codec can convert." );
-        msgBox.exec();
+        msgbox_mkv_to_mp4();
     }
 }
 
+
+void QvkConvert_mkv_mp4_wl::msgbox_mkv_to_mp4() {
+    QString text = "Only videos with H264 codec and audio codec MP3 or Opus can convert.";
+    qDebug().noquote() << global::nameOutput << "[Convert] " << "Convert failed";
+    qDebug().noquote() << global::nameOutput << "[Convert] " << text;
+
+    QMessageBox msgBox( ui->centralwidget );
+    msgBox.setModal( true );
+    msgBox.setIcon( QMessageBox::Warning );
+    QString space = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+    msgBox.setText( space + "<b>Convert failed</b>" + space );
+    msgBox.setInformativeText( text );
+    msgBox.exec();
+}
 
 //----------------------------------------- Begin discover ----------------------------------------------------------------------------
 // https://github.com/GStreamer/gst-docs/blob/master/examples/tutorials/basic-tutorial-9.c
