@@ -20,38 +20,38 @@
  * --End_License--
  */
 
-#ifndef QVKCONVERT_MKV_MP4_WL_H
-#define QVKCONVERT_MKV_MP4_WL_H
+#ifndef QVKCONVERT_MKV_REPAIR_WL_H
+#define QVKCONVERT_MKV_REPAIR_WL_H
 
 #include "ui_formMainWindow_wl.h"
 #include "mainWindow_wl.h"
 
 #include <QWidget>
 
-class QvkConvert_mkv_mp4_wl: public QWidget
+class QvkConvert_mkv_repair_wl: public QWidget
 {
     Q_OBJECT
 public:
-    QvkConvert_mkv_mp4_wl(QvkMainWindow_wl *vkMainWindow, Ui_formMainWindow_wl *vk_ui );
-    virtual ~QvkConvert_mkv_mp4_wl();
+    QvkConvert_mkv_repair_wl( QvkMainWindow_wl *vkMainWindow, Ui_formMainWindow_wl *vk_ui );
+    virtual ~QvkConvert_mkv_repair_wl();
     QvkMainWindow_wl *mainWindow;
 
 
 private:
-    static GstBusSyncReply call_bus_message_convert_mp4( GstBus *bus, GstMessage *message, gpointer user_data );
+    static GstBusSyncReply call_bus_message_convert_repair( GstBus *bus, GstMessage *message, gpointer user_data );
     QPalette paletteConvertWidget;
     QPalette paletteConvertLabel;
     QTimer *timer;
     GstElement *pipeline = nullptr;
-    void msgbox_mkv_to_mp4();
+    void msgbox_mkv_repair();
 
 public slots:
 
 
 private slots:
-    void slot_convert_openfiledialog_mkv_to_mp4(bool);
-    void slot_convert_mkv_to_mp4(bool);
-    void slot_lineEdit_Convert_eos_MP4(QString);
+    void slot_convert_openfiledialog_mkv_repair(bool);
+    void slot_convert_mkv_repair(bool);
+    void slot_lineEdit_Convert_eos_repair(QString);
 
     void slot_dicover_set_filePath(bool);
     void slot_dicover_start( QString filePath );

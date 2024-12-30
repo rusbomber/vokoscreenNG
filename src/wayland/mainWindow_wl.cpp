@@ -6,6 +6,7 @@
 #include "QvkAudioController_wl.h"
 #include "QvkConvert_mkv_mp4_wl.h"
 #include "QvkConvert_mkv_gif_wl.h"
+#include "QvkConvert_mkv_repair_wl.h"
 
 #include "global.h"
 #include "QvkLicenses.h"
@@ -133,6 +134,7 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
 //    new QvkCameraController_wl( ui ); //------------------------------------------------------------------------
     new QvkConvert_mkv_mp4_wl( this, ui );
     new QvkConvert_mkv_gif_wl( this, ui );
+    new QvkConvert_mkv_repair_wl( this, ui );
 
     QList<QScreen *> screen = QGuiApplication::screens();
     if ( !screen.empty() ) {

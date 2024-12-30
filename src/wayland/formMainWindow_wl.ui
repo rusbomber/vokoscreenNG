@@ -2960,7 +2960,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_30">
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_repair_mkv">
+                   <widget class="QLineEdit" name="lineEdit_convert_mkv_repair">
                     <property name="text">
                      <string notr="true"/>
                     </property>
@@ -2970,14 +2970,14 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QToolButton" name="toolButton_repair_dialog_mkv">
+                   <widget class="QToolButton" name="toolButton_convert_dialog_mkv_repair">
                     <property name="text">
                      <string notr="true">...</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="pushButton_repair_mkv">
+                   <widget class="QPushButton" name="pushButton_convert_mkv_repair">
                     <property name="enabled">
                      <bool>false</bool>
                     </property>
@@ -2993,7 +2993,7 @@
                  </layout>
                 </item>
                 <item>
-                 <widget class="QWidget" name="widget_repair_mkv" native="true">
+                 <widget class="QWidget" name="widget_convert_mkv_repair" native="true">
                   <property name="styleSheet">
                    <string notr="true"/>
                   </property>
@@ -3014,7 +3014,7 @@
                     <number>0</number>
                    </property>
                    <item alignment="Qt::AlignHCenter">
-                    <widget class="QLabel" name="label_repair_mkv">
+                    <widget class="QLabel" name="label_convert_mkv_repair">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
                        <horstretch>0</horstretch>

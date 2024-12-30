@@ -33,4 +33,5 @@ namespace global
     extern QList<QLineEdit*> *listChildren;
     extern QLineEdit *lineEditConvertMP4;
     extern QLineEdit *lineEditConvertGIF;
+    extern QLineEdit *lineEditConvertRepair;
 }
