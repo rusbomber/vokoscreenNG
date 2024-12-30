@@ -254,10 +254,10 @@ void QvkConvert_mkv_repair_wl::slot_convert_mkv_repair(bool)
 
         // Start playing
         GstStateChangeReturn ret = gst_element_set_state( pipeline, GST_STATE_PLAYING );
-        if ( ret == GST_STATE_CHANGE_FAILURE )   { qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_FAILURE" << "Returncode =" << ret;   } // 0
-        if ( ret == GST_STATE_CHANGE_SUCCESS )   { qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_SUCCESS" << "Returncode =" << ret;   } // 1
-        if ( ret == GST_STATE_CHANGE_ASYNC )     { qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_ASYNC"   << "Returncode =" << ret;   } // 2
-        if ( ret == GST_STATE_CHANGE_NO_PREROLL ){ qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_NO_PREROLL" << "Returncode =" << ret; }// 3
+        if ( ret == GST_STATE_CHANGE_FAILURE )   { qDebug().noquote() << global::nameOutput << "[Convert] repair was clicked" << "GST_STATE_CHANGE_FAILURE" << "Returncode =" << ret;   } // 0
+        if ( ret == GST_STATE_CHANGE_SUCCESS )   { qDebug().noquote() << global::nameOutput << "[Convert] repair was clicked" << "GST_STATE_CHANGE_SUCCESS" << "Returncode =" << ret;   } // 1
+        if ( ret == GST_STATE_CHANGE_ASYNC )     { qDebug().noquote() << global::nameOutput << "[Convert] repair was clicked" << "GST_STATE_CHANGE_ASYNC"   << "Returncode =" << ret;   } // 2
+        if ( ret == GST_STATE_CHANGE_NO_PREROLL ){ qDebug().noquote() << global::nameOutput << "[Convert] repair was clicked" << "GST_STATE_CHANGE_NO_PREROLL" << "Returncode =" << ret; }// 3
         if ( ret == GST_STATE_CHANGE_FAILURE )   {
             qDebug().noquote() << global::nameOutput << "[Convert] Unable to set the pipeline to the playing state.";
             gst_object_unref( pipeline );
@@ -271,14 +271,14 @@ void QvkConvert_mkv_repair_wl::slot_convert_mkv_repair(bool)
 
 void QvkConvert_mkv_repair_wl::msgbox_mkv_repair() {
     QString text = "Only videos with H264 codec and audio codec MP3 or Opus can convert.";
-    qDebug().noquote() << global::nameOutput << "[Convert] " << "Convert failed";
+    qDebug().noquote() << global::nameOutput << "[Convert] " << "Repair failed";
     qDebug().noquote() << global::nameOutput << "[Convert] " << text;
 
     QMessageBox msgBox( ui->centralwidget );
     msgBox.setModal( true );
     msgBox.setIcon( QMessageBox::Warning );
     QString space = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-    msgBox.setText( space + "<b>Convert failed</b>" + space );
+    msgBox.setText( space + "<b>Repair failed</b>" + space );
     msgBox.setInformativeText( text );
     msgBox.exec();
 }

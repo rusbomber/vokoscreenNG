@@ -86,18 +86,11 @@ QvkContainer_wl::QvkContainer_wl(QObject *parent) : QObject(parent)
 {
     Container_wl *MKV = new Container_wl( "matroskamux", "mkv" );
     MKV->add_VideoCodec( "openh264enc", "H.264" );
-    MKV->add_VideoCodec( "vp8enc", "VP8");
-//    MKV->add_AudioCodec( "vorbisenc", "vorbis" );
-//    MKV->add_AudioCodec( "flacenc", "flac" );
     MKV->add_AudioCodec( "opusenc", "opus" );
     MKV->add_AudioCodec( "lamemp3enc", "mp3" );
 
-//    Container_wl *GIF = new Container_wl( "gifenc", "gif" );
-//    GIF->add_VideoCodec( "gifenc", "gif" );
-
     Containers = new QList<Container_wl*>;
     Containers->append( MKV );
-//    Containers->append( GIF );
 }
 
 /*!
