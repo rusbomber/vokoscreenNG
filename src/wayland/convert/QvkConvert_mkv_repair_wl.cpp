@@ -204,96 +204,63 @@ void QvkConvert_mkv_repair_wl::slot_convert_mkv_repair(bool)
     qDebug().noquote() << global::nameOutput << "[Convert] Detected audio codec:" << audio_codec;
 
     if ( video_codec == "H264" ) {
-        if ( ( audio_codec == "" ) or ( audio_codec == "MPEG" ) or ( audio_codec == "Opus" ) ) {
-            ui->toolButton_convert_dialog_mkv_repair->setDisabled( true );
-            ui->pushButton_convert_mkv_repair->setDisabled( true );
+        ui->toolButton_convert_dialog_mkv_repair->setDisabled( true );
+        ui->pushButton_convert_mkv_repair->setDisabled( true );
 
-            // Hintergrundfarbe für Widget setzen
-            QPalette palette_1 = ui->pushButton_convert_mkv_repair->palette();
-            palette_1.setColor( QPalette::Window, QColor( QColor( 239, 240, 241 ) ) );
-            ui->pushButton_convert_mkv_repair->setAutoFillBackground( true );
-            ui->pushButton_convert_mkv_repair->setPalette( palette_1 );
-            // Hintergrundfarbe für label setzen
-            QPalette palette_2 = ui->label_convert_mkv_repair->palette();
-            palette_2.setColor( QPalette::Window, QColor( QColor( 239, 240, 241 ) ) );
-            ui->label_convert_mkv_repair->setAutoFillBackground( true );
-            ui->label_convert_mkv_repair->setPalette( palette_2 );
-            ui->label_convert_mkv_repair->setText( "Please wait" );
+        // Hintergrundfarbe für Widget setzen
+        QPalette palette_1 = ui->pushButton_convert_mkv_repair->palette();
+        palette_1.setColor( QPalette::Window, QColor( QColor( 239, 240, 241 ) ) );
+        ui->pushButton_convert_mkv_repair->setAutoFillBackground( true );
+        ui->pushButton_convert_mkv_repair->setPalette( palette_1 );
+        // Hintergrundfarbe für label setzen
+        QPalette palette_2 = ui->label_convert_mkv_repair->palette();
+        palette_2.setColor( QPalette::Window, QColor( QColor( 239, 240, 241 ) ) );
+        ui->label_convert_mkv_repair->setAutoFillBackground( true );
+        ui->label_convert_mkv_repair->setPalette( palette_2 );
+        ui->label_convert_mkv_repair->setText( "Please wait" );
 
-            GstElement *pipeline = nullptr;
+        GstElement *pipeline = nullptr;
 
-            QString filePath = ui->lineEdit_convert_mkv_repair->text();
-            QFileInfo fileInfo( filePath );
-            QString path = fileInfo.path();
+        QString filePath = ui->lineEdit_convert_mkv_repair->text();
+        QFileInfo fileInfo( filePath );
+        QString path = fileInfo.path();
 
-            QString VK_Pipeline;
-            if ( audio_codec == "" ) {
-                QString fileNameMP4 = fileInfo.baseName() + ".mp4";
-                VK_Pipeline = "filesrc location=" +
-                        filePath +
-                        " ! matroskademux ! h264parse ! queue ! mp4mux name=mux ! filesink location=" +
-                        path +
-                        "/" +
-                        fileNameMP4;
-            }
 
-            // gst-launch-1.0 -e filesrc location=/home/vk/Videos/vokoscreenNG-mit-audio.mkv ! matroskademux name=demux
-            // mp4mux name=mux ! filesink location=test2.mp4
-            // demux.video_0 ! queue ! h264parse ! mux.
-            // demux.audio_0 ! queue ! mpegaudioparse ! mux.
-            if ( audio_codec == "MPEG" ) {
-                QString fileNameMP4 = fileInfo.baseName() + ".mp4";
-                VK_Pipeline = "filesrc location=" +
-                        filePath +
-                        " ! matroskademux name=demux mp4mux name=mux ! filesink location=" +
-                        path +
-                        "/" +
-                        fileNameMP4 + " "
-                                      "demux.video_0 ! queue ! h264parse ! mux." + " " +
-                        "demux.audio_0 ! queue ! mpegaudioparse ! mux.";
-            }
+        // gst-launch-1.0 filesrc location=/home/vk/Videos/vokoscreenNG-kaputt-with-audio.mkv \
+        //     ! matroskademux \
+        //     ! h264parse \
+        //     ! queue \
+        //     ! matroskamux \
+        //     ! filesink location=test2.mkv
+        QString VK_Pipeline;
+        QString fileNameRepair = fileInfo.baseName() + "_repair.mkv";
+        VK_Pipeline = "filesrc location=" +
+                filePath +
+                " ! matroskademux ! h264parse ! queue ! matroskamux ! filesink location=" +
+                path +
+                "/" +
+                fileNameRepair;
 
-            // gst-launch-1.0 -e filesrc location=/home/vk/Videos/vokoscreenNG-mit-audio.mkv ! matroskademux name=demux
-            // mp4mux name=mux ! filesink location=test2.mp4
-            // demux.video_0 ! queue ! h264parse ! mux.
-            // demux.audio_0 ! queue ! opusparse ! mux.
-            if ( audio_codec == "Opus" ) {
-                QString fileNameMP4 = fileInfo.baseName() + ".mp4";
-                VK_Pipeline = "filesrc location=" +
-                        filePath +
-                        " ! matroskademux name=demux mp4mux name=mux ! filesink location=" +
-                        path +
-                        "/" +
-                        fileNameMP4 +
-                        " "
-                        "demux.video_0 ! queue ! h264parse ! mux." + " " +
-                        "demux.audio_0 ! queue ! opusparse ! mux.";
-            }
+        qDebug().noquote() << global::nameOutput << VK_Pipeline;
 
-            qDebug().noquote() << global::nameOutput << VK_Pipeline;
+        QByteArray byteArray = VK_Pipeline.toUtf8();
+        const gchar *line = byteArray.constData();
+        GError *error = Q_NULLPTR;
+        pipeline = gst_parse_launch( line, &error );
 
-            QByteArray byteArray = VK_Pipeline.toUtf8();
-            const gchar *line = byteArray.constData();
-            GError *error = Q_NULLPTR;
-            pipeline = gst_parse_launch( line, &error );
+        GstBus *bus = gst_pipeline_get_bus( GST_PIPELINE ( pipeline ) );
+        gst_bus_set_sync_handler( bus, (GstBusSyncHandler)call_bus_message_convert_repair, this, NULL );
+        gst_object_unref( bus );
 
-            GstBus *bus = gst_pipeline_get_bus( GST_PIPELINE ( pipeline ) );
-            gst_bus_set_sync_handler( bus, (GstBusSyncHandler)call_bus_message_convert_repair, this, NULL );
-            gst_object_unref( bus );
-
-            // Start playing
-            GstStateChangeReturn ret = gst_element_set_state( pipeline, GST_STATE_PLAYING );
-            if ( ret == GST_STATE_CHANGE_FAILURE )   { qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_FAILURE" << "Returncode =" << ret;   } // 0
-            if ( ret == GST_STATE_CHANGE_SUCCESS )   { qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_SUCCESS" << "Returncode =" << ret;   } // 1
-            if ( ret == GST_STATE_CHANGE_ASYNC )     { qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_ASYNC"   << "Returncode =" << ret;   } // 2
-            if ( ret == GST_STATE_CHANGE_NO_PREROLL ){ qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_NO_PREROLL" << "Returncode =" << ret; }// 3
-            if ( ret == GST_STATE_CHANGE_FAILURE )   {
-                qDebug().noquote() << global::nameOutput << "[Convert] Unable to set the pipeline to the playing state.";
-                gst_object_unref( pipeline );
-                return;
-            }
-        } else {
-            msgbox_mkv_repair();
+        // Start playing
+        GstStateChangeReturn ret = gst_element_set_state( pipeline, GST_STATE_PLAYING );
+        if ( ret == GST_STATE_CHANGE_FAILURE )   { qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_FAILURE" << "Returncode =" << ret;   } // 0
+        if ( ret == GST_STATE_CHANGE_SUCCESS )   { qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_SUCCESS" << "Returncode =" << ret;   } // 1
+        if ( ret == GST_STATE_CHANGE_ASYNC )     { qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_ASYNC"   << "Returncode =" << ret;   } // 2
+        if ( ret == GST_STATE_CHANGE_NO_PREROLL ){ qDebug().noquote() << global::nameOutput << "[Convert] MP4 was clicked" << "GST_STATE_CHANGE_NO_PREROLL" << "Returncode =" << ret; }// 3
+        if ( ret == GST_STATE_CHANGE_FAILURE )   {
+            qDebug().noquote() << global::nameOutput << "[Convert] Unable to set the pipeline to the playing state.";
+            gst_object_unref( pipeline );
             return;
         }
     } else {
@@ -508,7 +475,7 @@ static void on_finished_cb (GstDiscoverer * discoverer, CustomData * data)
 
 void QvkConvert_mkv_repair_wl::slot_dicover_set_filePath(bool)
 {
-    slot_dicover_start( "file://" + ui->lineEdit_convert_mkv_to_mp4->text() );
+    slot_dicover_start( "file://" + ui->lineEdit_convert_mkv_repair->text() );
 }
 
 
