@@ -97,7 +97,7 @@ void QvkConvert_mkv_repair_wl::slot_lineEdit_Convert_eos_repair(QString)
     palette_2.setColor( QPalette::Window, QColor( Qt::green ) );
     ui->label_convert_mkv_repair->setAutoFillBackground( true );
     ui->label_convert_mkv_repair->setPalette( palette_2 );
-    ui->label_convert_mkv_repair->setText( "File was successfully converted" );
+    ui->label_convert_mkv_repair->setText( "File was successfully repaired" );
 
     ui->toolButton_convert_dialog_mkv_repair->setDisabled( false );
     ui->pushButton_convert_mkv_repair->setDisabled( false );
@@ -122,7 +122,7 @@ void QvkConvert_mkv_repair_wl::slot_convert_openfiledialog_mkv_repair(bool)
             pathFile = vkFileDialog.selectedFiles().at(0);
             ui->lineEdit_convert_mkv_repair->setText( pathFile );
             ui->pushButton_convert_mkv_repair->setEnabled( true );
-            ui->label_convert_mkv_repair->setText( "Please start convert" );
+            ui->label_convert_mkv_repair->setText( "Please start repair" );
 
             ui->widget_convert_mkv_repair->setAutoFillBackground( true );
             ui->widget_convert_mkv_repair->setPalette( paletteConvertWidget );
@@ -143,32 +143,32 @@ GstBusSyncReply QvkConvert_mkv_repair_wl::call_bus_message_convert_repair( GstBu
     switch(GST_MESSAGE_TYPE (message))
     {
     case GST_MESSAGE_ERROR:
-        qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_ERROR";
+        qDebug().noquote() << global::nameOutput << "[Convert][Repair] GST_MESSAGE_ERROR";
         break;
     case GST_MESSAGE_EOS: {
-        qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_EOS";
+        qDebug().noquote() << global::nameOutput << "[Convert][Repair] GST_MESSAGE_EOS";
         counterConvertRepair++;
         global::lineEditConvertRepair->setText( QString::number( counterConvertRepair ) );
         break;
     }
     case GST_MESSAGE_DURATION_CHANGED:
-        qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_DURATION_CHANGED";
+        qDebug().noquote() << global::nameOutput << "[Convert][Repair] GST_MESSAGE_DURATION_CHANGED";
         break;
     case GST_MESSAGE_STEP_DONE:
-        qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_STEP_DONE";
+        qDebug().noquote() << global::nameOutput << "[Convert][Repair] GST_MESSAGE_STEP_DONE";
         break;
     case GST_MESSAGE_TAG:
-        qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_TAG";
+        qDebug().noquote() << global::nameOutput << "[Convert][Repair] GST_MESSAGE_TAG";
         break;
     case GST_MESSAGE_STATE_CHANGED:
-        // qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_STATE_CHANGED";
+        // qDebug().noquote() << global::nameOutput << "[Convert][Repair] GST_MESSAGE_STATE_CHANGED";
         break;
     case GST_MESSAGE_STREAM_START:
-        qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_STREAM_START";
+        qDebug().noquote() << global::nameOutput << "[Convert][Repair] GST_MESSAGE_STREAM_START";
         break;
     case GST_MESSAGE_APPLICATION:
     {
-        qDebug().noquote() << global::nameOutput << "[Convert] GST_MESSAGE_APPLICATION";
+        qDebug().noquote() << global::nameOutput << "[Convert][Repair] GST_MESSAGE_APPLICATION";
         break;
     }
     default:
@@ -200,8 +200,8 @@ void QvkConvert_mkv_repair_wl::slot_convert_mkv_repair(bool)
         audio_codec = "Opus";
     }
 
-    qDebug().noquote() << global::nameOutput << "[Convert] Detected video codec:" << video_codec;
-    qDebug().noquote() << global::nameOutput << "[Convert] Detected audio codec:" << audio_codec;
+    qDebug().noquote() << global::nameOutput << "[Convert][Repair] Detected video codec:" << video_codec;
+    qDebug().noquote() << global::nameOutput << "[Convert][Repair] Detected audio codec:" << audio_codec;
 
     if ( video_codec == "H264" ) {
         ui->toolButton_convert_dialog_mkv_repair->setDisabled( true );
@@ -259,7 +259,7 @@ void QvkConvert_mkv_repair_wl::slot_convert_mkv_repair(bool)
         if ( ret == GST_STATE_CHANGE_ASYNC )     { qDebug().noquote() << global::nameOutput << "[Convert] repair was clicked" << "GST_STATE_CHANGE_ASYNC"   << "Returncode =" << ret;   } // 2
         if ( ret == GST_STATE_CHANGE_NO_PREROLL ){ qDebug().noquote() << global::nameOutput << "[Convert] repair was clicked" << "GST_STATE_CHANGE_NO_PREROLL" << "Returncode =" << ret; }// 3
         if ( ret == GST_STATE_CHANGE_FAILURE )   {
-            qDebug().noquote() << global::nameOutput << "[Convert] Unable to set the pipeline to the playing state.";
+            qDebug().noquote() << global::nameOutput << "[Convert][Repair] Unable to set the pipeline to the playing state.";
             gst_object_unref( pipeline );
             return;
         }
@@ -270,9 +270,9 @@ void QvkConvert_mkv_repair_wl::slot_convert_mkv_repair(bool)
 
 
 void QvkConvert_mkv_repair_wl::msgbox_mkv_repair() {
-    QString text = "Only videos with H264 codec and audio codec MP3 or Opus can convert.";
-    qDebug().noquote() << global::nameOutput << "[Convert] " << "Repair failed";
-    qDebug().noquote() << global::nameOutput << "[Convert] " << text;
+    QString text = "Only videos with H264 codec and audio codec MP3 or Opus can repair.";
+    qDebug().noquote() << global::nameOutput << "[Convert][Repair] " << "Repair failed";
+    qDebug().noquote() << global::nameOutput << "[Convert][Repair] " << text;
 
     QMessageBox msgBox( ui->centralwidget );
     msgBox.setModal( true );
@@ -405,16 +405,16 @@ static void on_discovered_cb (GstDiscoverer *discoverer, GstDiscovererInfo *info
     result = gst_discoverer_info_get_result (info);
     switch (result) {
     case GST_DISCOVERER_URI_INVALID:
-        g_print ("[vokoscreenNG] Invalid URI '%s'\n", uri);
+        g_print ("[vokoscreenNG][Repair] Invalid URI '%s'\n", uri);
         break;
     case GST_DISCOVERER_ERROR:
-        g_print ("[vokoscreenNG] Discoverer error: %s\n", err->message);
+        g_print ("[vokoscreenNG][Repair] Discoverer error: %s\n", err->message);
         break;
     case GST_DISCOVERER_TIMEOUT:
-        g_print ("[vokoscreenNG] Timeout\n");
+        g_print ("[vokoscreenNG][Repair] Timeout\n");
         break;
     case GST_DISCOVERER_BUSY:
-        g_print ("[vokoscreenNG] Busy\n");
+        g_print ("[vokoscreenNG][Repair] Busy\n");
         break;
     case GST_DISCOVERER_MISSING_PLUGINS:{
         const GstStructure *s;
@@ -423,17 +423,17 @@ static void on_discovered_cb (GstDiscoverer *discoverer, GstDiscovererInfo *info
         s = gst_discoverer_info_get_misc (info);
         str = gst_structure_to_string (s);
 
-        g_print ("[vokoscreenNG] Missing plugins: %s\n", str);
+        g_print ("[vokoscreenNG][Repair] Missing plugins: %s\n", str);
         g_free (str);
         break;
     }
     case GST_DISCOVERER_OK:
-        g_print ("[vokoscreenNG] Discovered '%s'\n", uri);
+        g_print ("[vokoscreenNG][Repair] Discovered '%s'\n", uri);
         break;
     }
 
     if (result != GST_DISCOVERER_OK) {
-        g_printerr ("[vokoscreenNG] This URI cannot be played\n");
+        g_printerr ("[vokoscreenNG][Repair] This URI cannot be played\n");
         return;
     }
 
@@ -468,7 +468,7 @@ static void on_discovered_cb (GstDiscoverer *discoverer, GstDiscovererInfo *info
 static void on_finished_cb (GstDiscoverer * discoverer, CustomData * data)
 {
     Q_UNUSED(discoverer)
-    g_print( "[vokoscreenNG] Finished discovering\n\n" );
+    g_print( "[vokoscreenNG][Repair] Finished discovering\n\n" );
     g_main_loop_quit( data->loop );
 }
 
@@ -494,7 +494,7 @@ void QvkConvert_mkv_repair_wl::slot_dicover_start( QString filePath )
     // Instantiate the Discoverer
     data.discoverer = gst_discoverer_new (5 * GST_SECOND, &err);
     if (!data.discoverer) {
-        g_print ("[vokoscreenNG] Error creating discoverer instance: %s\n", err->message);
+        g_print ("[vokoscreenNG][Repair] Error creating discoverer instance: %s\n", err->message);
         g_clear_error (&err);
         //    return -1;
     }
@@ -508,7 +508,7 @@ void QvkConvert_mkv_repair_wl::slot_dicover_start( QString filePath )
 
     // Add a request to process asynchronously the URI passed through the command line
     if (!gst_discoverer_discover_uri_async (data.discoverer, uri)) {
-        g_print ("[vokoscreenNG] Failed to start discovering URI '%s'\n", uri);
+        g_print ("[vokoscreenNG][Repair] Failed to start discovering URI '%s'\n", uri);
         g_object_unref (data.discoverer);
         //    return -1;
     }
