@@ -7,16 +7,16 @@ assignees: ''
 
 ---
 
+**Please note the following**
+Only complete bug reports will be processed.
+If the bug report is not complete, it will be deleted without asking.
+
+
 **Bug report checklist**
 * [ ] Always send the vokoscreenNG log, after a "Start" and "Stop"
 * [ ] Have you searched the existing issues to see if this report is a duplicate?
 * [ ] Are you using the latest version of vokoscreenNG?
 * [ ] Are you familiar with https://www.mediawiki.org/wiki/How_to_report_a_bug ?
-
-**Wayland on Linux is experimental**
-This means that many features are currently not available, such as audio, halo, global keyboard shortcuts, showclick and camera.
-Please only write bug reports for existing functions.
-
 
 **Describe the bug**
 A clear and concise description of what the bug is.
