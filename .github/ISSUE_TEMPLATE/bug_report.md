@@ -9,7 +9,7 @@ assignees: ''
 
 **Please note the following**
 Only complete bug reports will be processed.
-If the bug report is not complete, it will be deleted without asking.
+If the bug report does not contain a vokoscreenNG log, it will not be processed and will be deleted without asking.
 
 
 **Bug report checklist**
