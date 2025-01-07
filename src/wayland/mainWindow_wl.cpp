@@ -106,6 +106,7 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
     QvkAudioController_wl *vkAudioController = new QvkAudioController_wl( ui );
     vkAudioController->init();
 
+    vkHelp = new QvkHelp_wl( ui );
     new QvkLicenses( ui->pushButtonLicense );
     new QvkImageFromTabs_wl( this );
 

@@ -37,3 +37,6 @@ include(audio/audio_wl.pri)
 
 # Convert
 include(convert/convert_wl.pri)
+
+# Help
+include(help/help_wl.pri)

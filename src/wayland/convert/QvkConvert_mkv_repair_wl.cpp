@@ -226,11 +226,11 @@ void QvkConvert_mkv_repair_wl::slot_convert_mkv_repair(bool)
         QString path = fileInfo.path();
 
 
-        // gst-launch-1.0 filesrc location=/home/vk/Videos/vokoscreenNG-kaputt-with-audio.mkv \
-        //     ! matroskademux \
-        //     ! h264parse \
-        //     ! queue \
-        //     ! matroskamux \
+        // gst-launch-1.0 filesrc location=/home/vk/Videos/vokoscreenNG-kaputt-with-audio.mkv
+        //     ! matroskademux
+        //     ! h264parse
+        //     ! queue
+        //     ! matroskamux
         //     ! filesink location=test2.mkv
         QString VK_Pipeline;
         QString fileNameRepair = fileInfo.baseName() + "_repair.mkv";

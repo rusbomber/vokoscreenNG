@@ -20,19 +20,46 @@
  * --End_License--
  */
 
-#include "global.h"
-#include <QString>
-#include <QLineEdit>
+#ifndef QVKDOWNLOADER_WL_H
+#define QVKDOWNLOADER_WL_H
 
-namespace global
+#include <QObject>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QVector>
+#include <QUrl>
+#include <QIODevice>
+
+
+class QvkDownloader_wl : public QObject
 {
-    QString version = "4.5.0-beta";
-    QString name = "vokoscreenNG";
-    QString nameOutput = "[" + name + "]";
-    int showclickCounter = 0;
-    QLineEdit *lineEditWASAPIWatcher;
-    QList<QLineEdit*> *listChildren;
-    QLineEdit *lineEditConvertMP4;
-    QLineEdit *lineEditConvertGIF;
-    QLineEdit *lineEditConvertRepair;
-}
+    Q_OBJECT
+    QNetworkAccessManager networkAccessManager;
+    QVector<QNetworkReply *> listDownloads;
+
+
+public:
+    explicit QvkDownloader_wl( QString pathLocal, QObject *parent = nullptr);
+    void doDownload( const QUrl &url );
+
+
+private:
+    QString tempPath;
+    bool saveLocal(const QString &filename, QIODevice *data );
+    void execute();
+
+
+signals:
+    void signal_fileDownloaded( QString );
+
+
+public slots:
+    void slot_downloadFinished( QNetworkReply *reply );
+
+
+private slots:
+
+
+};
+
+#endif // QvkDownloader_H

@@ -20,19 +20,45 @@
  * --End_License--
  */
 
-#include "global.h"
-#include <QString>
-#include <QLineEdit>
+#ifndef QVKLOCALE_WL_H
+#define QVKLOCALE_WL_H
 
-namespace global
+#include "QvkDownloader_wl.h"
+
+#include <QObject>
+#include <QTemporaryDir>
+#include <QStringList>
+
+class QvkLocale_wl: public QObject
 {
-    QString version = "4.5.0-beta";
-    QString name = "vokoscreenNG";
-    QString nameOutput = "[" + name + "]";
-    int showclickCounter = 0;
-    QLineEdit *lineEditWASAPIWatcher;
-    QList<QLineEdit*> *listChildren;
-    QLineEdit *lineEditConvertMP4;
-    QLineEdit *lineEditConvertGIF;
-    QLineEdit *lineEditConvertRepair;
-}
+    Q_OBJECT
+
+public:
+    QvkLocale_wl();
+    virtual ~QvkLocale_wl() override;
+
+
+public slots:
+    void slot_cleanUp();
+
+
+private:
+    QTemporaryDir temporaryDirLocal;
+    QvkDownloader_wl *vkDownload;
+    QStringList localeList;
+
+
+private slots:
+    void slot_parse( QString tempPathFileName );
+
+
+protected:
+
+
+signals:
+   void signal_locale( QStringList list );
+
+
+};
+
+#endif
