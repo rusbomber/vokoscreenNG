@@ -261,7 +261,7 @@
           <item>
            <widget class="QTabWidget" name="tabWidgetScreencast">
             <property name="currentIndex">
-             <number>2</number>
+             <number>0</number>
             </property>
             <property name="iconSize">
              <size>
@@ -664,6 +664,13 @@
                           </size>
                          </property>
                         </spacer>
+                       </item>
+                       <item>
+                        <widget class="QCheckBox" name="checkBoxSeparatedAudioTracks">
+                         <property name="text">
+                          <string>Separated audio tracks</string>
+                         </property>
+                        </widget>
                        </item>
                       </layout>
                      </item>
@@ -1368,6 +1375,46 @@
              <layout class="QHBoxLayout" name="horizontalLayout_4">
               <item>
                <layout class="QGridLayout" name="gridLayout_10">
+                <item row="3" column="0">
+                 <spacer name="verticalSpacer_23">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="1" column="0">
+                 <layout class="QHBoxLayout" name="horizontalLayout_9">
+                  <property name="rightMargin">
+                   <number>9</number>
+                  </property>
+                  <item>
+                   <widget class="QLabel" name="label_34">
+                    <property name="text">
+                     <string>Second wait before recording</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_44">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
                 <item row="0" column="0">
                  <layout class="QHBoxLayout" name="horizontalLayout_25">
                   <item>
@@ -1417,144 +1464,106 @@
                   </item>
                  </layout>
                 </item>
-                <item row="3" column="0">
-                 <spacer name="verticalSpacer_23">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item row="1" column="0">
-                 <layout class="QHBoxLayout" name="horizontalLayout_9">
-                  <property name="rightMargin">
-                   <number>9</number>
-                  </property>
-                  <item>
-                   <widget class="QLabel" name="label_34">
-                    <property name="text">
-                     <string>Second wait before recording</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="horizontalSpacer_44">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
                 <item row="2" column="0">
-                 <layout class="QGridLayout" name="gridLayout_14">
-                  <item row="0" column="3">
-                   <spacer name="horizontalSpacer_52">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item row="0" column="4">
-                   <widget class="QLabel" name="label_35">
-                    <property name="maximumSize">
-                     <size>
-                      <width>24</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string notr="true"/>
-                    </property>
-                    <property name="pixmap">
-                     <pixmap resource="../screencast.qrc">:/pictures/screencast/information.png</pixmap>
-                    </property>
-                    <property name="scaledContents">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QComboBox" name="comboBoxLanguage">
-                    <property name="editable">
-                     <bool>true</bool>
-                    </property>
-                    <property name="currentText">
-                     <string notr="true"/>
-                    </property>
-                    <property name="maxVisibleItems">
-                     <number>12</number>
-                    </property>
-                    <property name="placeholderText">
-                     <string notr="true"/>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="6">
-                   <spacer name="horizontalSpacer_29">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item row="0" column="5">
-                   <widget class="QComboBox" name="comboBoxOnlineHelp">
-                    <property name="currentText">
-                     <string notr="true">Automatically</string>
-                    </property>
-                    <property name="sizeAdjustPolicy">
-                     <enum>QComboBox::AdjustToContents</enum>
-                    </property>
-                    <item>
-                     <property name="text">
-                      <string>Automatically</string>
+                 <widget class="QWidget" name="widgetLanguageAndHelp" native="true">
+                  <layout class="QHBoxLayout" name="horizontalLayout_32">
+                   <item>
+                    <widget class="QLabel" name="label_66">
+                     <property name="maximumSize">
+                      <size>
+                       <width>28</width>
+                       <height>28</height>
+                      </size>
                      </property>
-                    </item>
-                   </widget>
-                  </item>
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="label_66">
-                    <property name="maximumSize">
-                     <size>
-                      <width>28</width>
-                      <height>28</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string notr="true"/>
-                    </property>
-                    <property name="pixmap">
-                     <pixmap resource="../screencast.qrc">:/pictures/screencast/world.png</pixmap>
-                    </property>
-                    <property name="scaledContents">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
+                     <property name="text">
+                      <string notr="true"/>
+                     </property>
+                     <property name="pixmap">
+                      <pixmap resource="../screencast.qrc">:/pictures/screencast/world.png</pixmap>
+                     </property>
+                     <property name="scaledContents">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QComboBox" name="comboBoxLanguage">
+                     <property name="editable">
+                      <bool>true</bool>
+                     </property>
+                     <property name="currentText">
+                      <string notr="true"/>
+                     </property>
+                     <property name="maxVisibleItems">
+                      <number>12</number>
+                     </property>
+                     <property name="placeholderText">
+                      <string notr="true"/>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_52">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="label_35">
+                     <property name="maximumSize">
+                      <size>
+                       <width>24</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string notr="true"/>
+                     </property>
+                     <property name="pixmap">
+                      <pixmap resource="../screencast.qrc">:/pictures/screencast/information.png</pixmap>
+                     </property>
+                     <property name="scaledContents">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QComboBox" name="comboBoxOnlineHelp">
+                     <property name="currentText">
+                      <string notr="true">Automatically</string>
+                     </property>
+                     <property name="sizeAdjustPolicy">
+                      <enum>QComboBox::AdjustToContents</enum>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>Automatically</string>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_29">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </widget>
                 </item>
                </layout>
               </item>
@@ -2217,7 +2226,17 @@
              </widget>
             </item>
             <item>
-             <widget class="QWidget" name="widget_2" native="true"/>
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </item>

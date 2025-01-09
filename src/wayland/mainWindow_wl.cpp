@@ -166,6 +166,7 @@ QvkMainWindow_wl::QvkMainWindow_wl( QWidget *parent, Qt::WindowFlags f )
     // Beim Start wird immer der selbe Tab geöffnet
     ui->toolButtonScreencast->click();
 
+    ui->widgetLanguageAndHelp->setVisible( false );
  }
 
 
@@ -811,24 +812,37 @@ void QvkMainWindow_wl::slot_start_gst( QString vk_fd, QString vk_path )
         stringList << "mux.";
     }
 
+
     // Pipeline for more as one audiodevice
     if ( ( VK_getSelectedAudioDevice().count() > 1 ) and ( ui->comboBoxAudioCodec->count() > 0 ) )
     {
-        for ( int x = 0; x < VK_getSelectedAudioDevice().count(); x++ )
-        {
-            stringList << "pulsesrc device=" + VK_getSelectedAudioDevice().at(x);
+        if ( ui->checkBoxSeparatedAudioTracks->isChecked() == false ) {
+            for ( int x = 0; x < VK_getSelectedAudioDevice().count(); x++ )
+            {
+                stringList << "pulsesrc device=" + VK_getSelectedAudioDevice().at(x);
+                stringList << "audioconvert";
+                stringList << "audioresample";
+                stringList << "queue";
+                stringList << "mix.";
+            }
+            stringList << "audiomixer name=mix";
             stringList << "audioconvert";
-            stringList << "audioresample";
+            stringList << "audiorate";
             stringList << "queue";
-            stringList << "mix.";
+            stringList << ui->comboBoxAudioCodec->currentData().toString();
+            stringList << "queue";
+            stringList << "mux.";
+        } else {
+            for ( int x = 0; x < VK_getSelectedAudioDevice().count(); x++ ) {
+                stringList << "pulsesrc device=" + VK_getSelectedAudioDevice().at(x);
+                stringList << "audio/x-raw,channels=2";
+                stringList << "audioconvert";
+                stringList << "audioresample";
+                stringList << "queue";
+                stringList << ui->comboBoxAudioCodec->currentData().toString();
+                stringList << "mux.";
+            }
         }
-        stringList << "audiomixer name=mix";
-        stringList << "audioconvert";
-        stringList << "audiorate";
-        stringList << "queue";
-        stringList << ui->comboBoxAudioCodec->currentData().toString();
-        stringList << "queue";
-        stringList << "mux.";
     }
 
     stringList << get_Muxer();
@@ -843,6 +857,8 @@ void QvkMainWindow_wl::slot_start_gst( QString vk_fd, QString vk_path )
 
     qDebug();
     qDebug().noquote() << global::nameOutput << "Free disk space at the beginning of the recording:" << ui->labelFreeSize->text() << "MB";
+    qDebug();
+    qDebug().noquote() << global::nameOutput << "Separated audio tracks:" << ui->checkBoxSeparatedAudioTracks->isChecked();
     qDebug();
     qDebug().noquote() << global::nameOutput << "Start record with:" << VK_Pipeline;
     qDebug();
